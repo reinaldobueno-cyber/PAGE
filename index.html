@@ -73,6 +73,12 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
 .stick-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
 .stick-row img{height:150px;width:auto;background:#fff;border-radius:12px;padding:10px;object-fit:contain}
 .device-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:7px}
+.company-groups{display:grid;gap:16px}
+.company-group{padding:13px;background:rgba(3,38,45,.28);border:1px solid rgba(167,243,208,.15);border-radius:12px}
+.company-title{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.company-title strong{font-size:.76rem;letter-spacing:.08em;color:#a7f3d0}
+.company-title span{font-size:.66rem;color:#7dd3fc;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);padding:2px 7px;border-radius:999px}
+.company-group .device-list{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
 .device{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:9px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
 .device:hover{background:rgba(255,255,255,.08)}
 .device-name{font-size:.84rem;font-weight:500;display:flex;align-items:center;gap:8px;flex:1;min-width:0}
@@ -234,63 +240,158 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
       </div>
         <div class="cat">
           <div class="cat-title">Bastões homologados (Web) <span>20</span></div>
-          <div class="device-list">
-            <div class="device"><div class="device-name">ALLFLEX AWR250 AGRIDENT</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ALLFLEX+AWR250+AGRIDENT+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">ALLFLEX RS420</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ALLFLEX+RS420+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">TRUTEST SRS2</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+SRS2+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">TRUTEST SRS2i</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+SRS2i+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">TRUTEST XRP2</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+XRP2+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">TRUTEST XRS2 | XRS2I</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+XRS2+%7C+XRS2I+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">GALLAGHER HANDHELD EID TAG</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGHER+HANDHELD+EID+TAG+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">GALLAGUER HR4</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGUER+HR4+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">GALLAGUER HR5</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGUER+HR5+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">H0 5E0DE</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=H0+5E0DE+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">PECFORT - CT002</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602234/manual-de-configuracao-leitor-ct002" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=PECFORT+-+CT002+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">PECFORT - CT002 V4</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602219/leitor-ct002-versao-4-5" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=PECFORT+-+CT002+V4+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">PECFORT - RC235</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=PECFORT+-+RC235+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">ANIMALLTAG AT05</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ANIMALLTAG+AT05+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">RC325</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=RC325+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">STICK REDER 380 SDK</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=STICK+REDER+380+SDK+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">LEITOR UHF PAINEL RFID ALLTAGS 8</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=LEITOR+UHF+PAINEL+RFID+ALLTAGS+8+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">RT100 V8</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602275/leitor-real-trace-rt100-v8" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=RT100+V8+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">READ 181 ORANGE</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602264/conexao-de-bastao-mbcurral-bastao-read-181-orange" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=READ+181+ORANGE+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">WS-S02</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602087/conexao-de-bastao-mbcurral-bastao-eletronico-ws-s02" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=WS-S02+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+          <div class="company-groups">
+            <section class="company-group">
+              <div class="company-title"><strong>ALLFLEX</strong><span>2 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">AWR250 AGRIDENT</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ALLFLEX+AWR250+AGRIDENT+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">RS420</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ALLFLEX+RS420+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>TRU-TEST</strong><span>4 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">SRS2</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+SRS2+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">SRS2i</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+SRS2i+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">XRP2</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+XRP2+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">XRS2 | XRS2I</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+XRS2+%7C+XRS2I+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>GALLAGHER</strong><span>3 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">HANDHELD EID TAG</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGHER+HANDHELD+EID+TAG+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">HR4</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGUER+HR4+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">HR5</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGUER+HR5+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>PECFORT</strong><span>3 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">CT002</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602234/manual-de-configuracao-leitor-ct002" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=PECFORT+-+CT002+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">CT002 V4</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602219/leitor-ct002-versao-4-5" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=PECFORT+-+CT002+V4+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">RC235</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=PECFORT+-+RC235+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>ANIMALLTAG</strong><span>1 modelo</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">AT05</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ANIMALLTAG+AT05+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>ALLTAGS</strong><span>1 modelo</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">PAINEL RFID ALLTAGS 8</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=LEITOR+UHF+PAINEL+RFID+ALLTAGS+8+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>OUTROS MODELOS</strong><span>6 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">H0 5E0DE</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=H0+5E0DE+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">RC325</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=RC325+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">STICK REDER 380 SDK</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=STICK+REDER+380+SDK+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">RT100 V8</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602275/leitor-real-trace-rt100-v8" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=RT100+V8+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">READ 181 ORANGE</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602264/conexao-de-bastao-mbcurral-bastao-read-181-orange" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=READ+181+ORANGE+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">WS-S02</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602087/conexao-de-bastao-mbcurral-bastao-eletronico-ws-s02" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=WS-S02+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
           </div>
         </div>
 
         <div class="cat">
           <div class="cat-title">Balanças homologadas (Web) <span>21</span></div>
-          <div class="device-list">
-            <div class="device"><div class="device-name">EZIWEIGH1I</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=EZIWEIGH1I+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">TRUTEST XR5000</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+XR5000+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">COIMMA KM-3PLUS</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=COIMMA+KM-3PLUS+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">VALFRAN CLASSE III</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=VALFRAN+CLASSE+III+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">GALLAGHER W-O</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGHER+W-O+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">TRUTEST S3</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+S3+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">TRUTEST S2</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+S2+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">BECKHAUSER - WBECK</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=BECKHAUSER+-+WBECK+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">SIGMACIA ICV-05</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=SIGMACIA+ICV-05+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">TRUTEST JR5000</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+JR5000+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">TOLEDO PRIX MGR CAMPO</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TOLEDO+PRIX+MGR+CAMPO+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">TOLEDO PRIX MGR CAMPO V2</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TOLEDO+PRIX+MGR+CAMPO+V2+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">AT55</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=AT55+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">ACR HD EASY</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ACR+HD+EASY+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">PRIX REBANHO</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=PRIX+REBANHO+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">WT300-I-PRO</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=WT300-I-PRO+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">COIMMA KM3-N</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=COIMMA+KM3-N+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">C20</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=C20+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">GALLAGUER TW-1</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGUER+TW-1+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">GALLAGUER TW-3</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGUER+TW-3+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">GALLAGUER TWR-5</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGUER+TWR-5+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+          <div class="company-groups">
+            <section class="company-group">
+              <div class="company-title"><strong>TRU-TEST</strong><span>5 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">EZIWEIGH1I</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=EZIWEIGH1I+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">XR5000</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+XR5000+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">S3</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+S3+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">S2</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+S2+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">JR5000</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TRUTEST+JR5000+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>GALLAGHER</strong><span>4 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">W-O</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGHER+W-O+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">TW-1</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGUER+TW-1+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">TW-3</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGUER+TW-3+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">TWR-5</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=GALLAGUER+TWR-5+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>COIMMA</strong><span>2 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">KM-3PLUS</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=COIMMA+KM-3PLUS+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">KM3-N</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=COIMMA+KM3-N+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>TOLEDO</strong><span>3 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">PRIX MGR CAMPO</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TOLEDO+PRIX+MGR+CAMPO+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">PRIX MGR CAMPO V2</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=TOLEDO+PRIX+MGR+CAMPO+V2+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">PRIX REBANHO</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=PRIX+REBANHO+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>BECKHAUSER</strong><span>1 modelo</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">WBECK</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=BECKHAUSER+-+WBECK+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>VALFRAN</strong><span>1 modelo</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">CLASSE III</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=VALFRAN+CLASSE+III+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>SIGMACIA</strong><span>1 modelo</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">ICV-05</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=SIGMACIA+ICV-05+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>ANIMALLTAG</strong><span>1 modelo</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">AT55</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=AT55+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>ACR</strong><span>1 modelo</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">HD EASY</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ACR+HD+EASY+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>OUTROS MODELOS</strong><span>2 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">WT300-I-PRO</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=WT300-I-PRO+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">C20</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=C20+balan%C3%A7a+eletr%C3%B4nica&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
           </div>
         </div>
 
         <div class="cat">
           <div class="cat-title">Leitores homologados (SISBOV) <span>3</span></div>
-          <div class="device-list">
-            <div class="device"><div class="device-name">ELETRÔNICO KP LE702</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ELETR%C3%94NICO+KP+LE702+leitor+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">ELETRÔNICO KP LE703</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602242/manual-de-configuracao-leitor-codigo-de-barras-le703-knup" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ELETR%C3%94NICO+KP+LE703+leitor+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-            <div class="device"><div class="device-name">ELETRÔNICO ZEBRA</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ELETR%C3%94NICO+ZEBRA+leitor+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+          <div class="company-groups">
+            <section class="company-group">
+              <div class="company-title"><strong>KP</strong><span>2 modelos</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">LE702</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ELETR%C3%94NICO+KP+LE702+leitor+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">LE703</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://multsoft.movidesk.com/kb/pt-br/article/602242/manual-de-configuracao-leitor-codigo-de-barras-le703-knup" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ELETR%C3%94NICO+KP+LE703+leitor+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
+            <section class="company-group">
+              <div class="company-title"><strong>ZEBRA</strong><span>1 modelo</span></div>
+              <div class="device-list">
+                <div class="device"><div class="device-name">LEITOR ELETRÔNICO</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ELETR%C3%94NICO+ZEBRA+leitor+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+              </div>
+            </section>
           </div>
         </div>
       </div>

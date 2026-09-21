@@ -116,6 +116,11 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
 @media(max-width:520px){.device-list{grid-template-columns:1fr}}
 
 .video-highlights{margin-bottom:22px}
+.video-product-filters{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.video-product-btn{display:flex;align-items:center;justify-content:center;gap:7px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;color:var(--muted);padding:10px 8px;font:inherit;font-size:.8rem;font-weight:600;cursor:pointer}
+.video-product-btn span{display:inline-flex;align-items:center;justify-content:center;min-width:25px;height:20px;padding:0 6px;border-radius:999px;background:rgba(255,255,255,.08);font-size:.68rem}
+.video-product-btn.active{background:#fff;border-color:#fff;color:#0a4f5c}
+.video-product-btn.active span{background:rgba(10,79,92,.12)}
 .video-tools{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px}
 .video-tools label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:7px}
 .video-search-row{display:flex;gap:8px;flex-wrap:wrap}
@@ -146,7 +151,8 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
 .vid-item strong{display:block;font-size:.86rem;font-weight:600;margin-bottom:2px}
 .vid-item span{font-size:.75rem;color:var(--muted)}
 .video-empty{font-size:.84rem;color:var(--muted)}
-@media(max-width:600px){.playlist-group summary{grid-template-columns:auto 1fr}.playlist-count{grid-column:2}.video-search-row input{min-width:100%}}
+@media(max-width:760px){.video-product-filters{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.playlist-group summary{grid-template-columns:auto 1fr}.playlist-count{grid-column:2}.video-search-row input{min-width:100%}.video-product-filters{grid-template-columns:1fr}}
 
 </style>
 </head>
@@ -383,7 +389,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
   <div class="section-inner">
     <div class="section-header">
       <h2>Vídeos instrucionais</h2>
-      <p>Catálogo completo do sumário oficial: 178 vídeos em 27 categorias</p>
+      <p>Catálogo completo separado por produto: 178 vídeos em 27 categorias</p>
     </div>
     <div class="videos-grid video-highlights">
       <a class="video-card" href="https://drive.google.com/file/d/1wRin55apWqYVpiIMw-gQzV82Ri_VOGeI/view" target="_blank" rel="noopener noreferrer">
@@ -395,17 +401,23 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
         <div><h3>Espelhamento RFeed e MB Tratos</h3><p>Google Drive</p></div>
       </a>
     </div>
+    <div class="video-product-filters" aria-label="Produto dos vídeos">
+      <button type="button" class="video-product-btn active" data-video-product="web" aria-pressed="true" onclick="setVideoProduct('web',this)">MB Web <span>104</span></button>
+      <button type="button" class="video-product-btn" data-video-product="desktop" aria-pressed="false" onclick="setVideoProduct('desktop',this)">MB Desktop (MBDT) <span>39</span></button>
+      <button type="button" class="video-product-btn" data-video-product="curral" aria-pressed="false" onclick="setVideoProduct('curral',this)">MB Curral / MB IATF <span>16</span></button>
+      <button type="button" class="video-product-btn" data-video-product="other" aria-pressed="false" onclick="setVideoProduct('other',this)">MB Tratos e outros <span>19</span></button>
+    </div>
     <div class="video-tools">
-      <label for="video-search">Buscar no catálogo</label>
+      <label for="video-search">Buscar nesta área</label>
       <div class="video-search-row">
         <input id="video-search" type="search" placeholder="Ex.: GTA, financeiro, reprodução..." autocomplete="off">
         <button type="button" onclick="toggleVideoGroups(true)">Expandir todas</button>
         <button type="button" onclick="toggleVideoGroups(false)">Recolher</button>
       </div>
-      <p id="video-results" aria-live="polite">178 vídeos encontrados</p>
+      <p id="video-results" aria-live="polite">104 vídeos em MB Web</p>
     </div>
     <div id="video-catalog" class="playlist-catalog">
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="curral">
         <summary>
           <span class="playlist-index">01</span>
           <span class="playlist-title">APP MB CURRAL</span>
@@ -421,7 +433,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="desktop">
         <summary>
           <span class="playlist-index">02</span>
           <span class="playlist-title">SISBOV - DESKTOP</span>
@@ -441,7 +453,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="web">
         <summary>
           <span class="playlist-index">03</span>
           <span class="playlist-title">SISBOV - WEB</span>
@@ -517,7 +529,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="desktop">
         <summary>
           <span class="playlist-index">04</span>
           <span class="playlist-title">REPRODUÇÃO - DESKTOP</span>
@@ -561,7 +573,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="curral">
         <summary>
           <span class="playlist-index">05</span>
           <span class="playlist-title">REPRODUÇÃO - IVF</span>
@@ -572,7 +584,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
           <p class="video-empty">O documento contém a playlist, mas não enumera vídeos nesta categoria.</p>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="web">
         <summary>
           <span class="playlist-index">06</span>
           <span class="playlist-title">REPRODUÇÃO - WEB</span>
@@ -648,7 +660,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="curral">
         <summary>
           <span class="playlist-index">07</span>
           <span class="playlist-title">REPRODUÇÃO - MBIATF</span>
@@ -676,7 +688,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="web">
         <summary>
           <span class="playlist-index">08</span>
           <span class="playlist-title">PMG - WEB</span>
@@ -696,7 +708,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="desktop">
         <summary>
           <span class="playlist-index">09</span>
           <span class="playlist-title">PMG - DESKTOP</span>
@@ -720,7 +732,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="other">
         <summary>
           <span class="playlist-index">10</span>
           <span class="playlist-title">APP - MS TASK</span>
@@ -748,7 +760,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="web">
         <summary>
           <span class="playlist-index">11</span>
           <span class="playlist-title">FINANCEIRO - WEB</span>
@@ -832,7 +844,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="web">
         <summary>
           <span class="playlist-index">12</span>
           <span class="playlist-title">ESTOQUE DE MATERIAIS - WEB</span>
@@ -864,7 +876,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="desktop">
         <summary>
           <span class="playlist-index">13</span>
           <span class="playlist-title">ESTOQUE DE MATERIAS - DESKTOP</span>
@@ -880,7 +892,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="curral">
         <summary>
           <span class="playlist-index">14</span>
           <span class="playlist-title">Estoque de animais - APP MB CURRAL</span>
@@ -904,7 +916,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="web">
         <summary>
           <span class="playlist-index">15</span>
           <span class="playlist-title">ESTOQUE DE ANIMAIS - WEB</span>
@@ -972,7 +984,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="other">
         <summary>
           <span class="playlist-index">16</span>
           <span class="playlist-title">APP MB TRATOS</span>
@@ -1016,7 +1028,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="desktop">
         <summary>
           <span class="playlist-index">17</span>
           <span class="playlist-title">CONFINAMENTO - DESKTOP</span>
@@ -1072,7 +1084,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="web">
         <summary>
           <span class="playlist-index">18</span>
           <span class="playlist-title">Infraestrutura - WEB</span>
@@ -1092,7 +1104,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="web">
         <summary>
           <span class="playlist-index">19</span>
           <span class="playlist-title">CONFIGURAÇÕES GERAIS - MULTBOVINOS WEB</span>
@@ -1120,7 +1132,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="curral">
         <summary>
           <span class="playlist-index">20</span>
           <span class="playlist-title">Aplicativo MB IATF</span>
@@ -1164,7 +1176,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="desktop">
         <summary>
           <span class="playlist-index">21</span>
           <span class="playlist-title">Agrícola - DESKTOP</span>
@@ -1188,7 +1200,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="other">
         <summary>
           <span class="playlist-index">22</span>
           <span class="playlist-title">Engorda/Confinamento</span>
@@ -1224,7 +1236,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="web">
         <summary>
           <span class="playlist-index">23</span>
           <span class="playlist-title">Reprodução - WEB</span>
@@ -1304,7 +1316,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="desktop">
         <summary>
           <span class="playlist-index">24</span>
           <span class="playlist-title">PMG - Desktop</span>
@@ -1328,7 +1340,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="desktop">
         <summary>
           <span class="playlist-index">25</span>
           <span class="playlist-title">Infraestrutura - DESKTOP</span>
@@ -1372,7 +1384,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="web">
         <summary>
           <span class="playlist-index">26</span>
           <span class="playlist-title">Financeiro - WEB</span>
@@ -1424,7 +1436,7 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
                   </div>
         </div>
       </details>
-      <details class="playlist-group">
+      <details class="playlist-group" data-product="other">
         <summary>
           <span class="playlist-index">27</span>
           <span class="playlist-title">Configuração ANYDESK</span>
@@ -1464,30 +1476,49 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
 function normalizeSearch(value){
   return value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 }
+let activeVideoProduct='web';
+const videoProductLabels={
+  web:'MB Web',
+  desktop:'MB Desktop (MBDT)',
+  curral:'MB Curral / MB IATF',
+  other:'MB Tratos e outros'
+};
+function setVideoProduct(product,button){
+  activeVideoProduct=product;
+  document.querySelectorAll('.video-product-btn').forEach(item=>{
+    const active=item===button;
+    item.classList.toggle('active',active);
+    item.setAttribute('aria-pressed',String(active));
+  });
+  document.querySelectorAll('.playlist-group').forEach(group=>group.open=false);
+  filterVideos();
+}
 function filterVideos(){
   const query=normalizeSearch(document.getElementById('video-search').value.trim());
   let visible=0;
   document.querySelectorAll('.playlist-group').forEach(group=>{
+    const productMatches=group.dataset.product===activeVideoProduct;
     const groupTitle=normalizeSearch(group.querySelector('.playlist-title').textContent);
     let groupVisible=0;
     group.querySelectorAll('.vid-item').forEach(item=>{
-      const matches=!query||groupTitle.includes(query)||normalizeSearch(item.textContent).includes(query);
+      const matches=productMatches&&(!query||groupTitle.includes(query)||normalizeSearch(item.textContent).includes(query));
       item.hidden=!matches;
       if(matches) groupVisible++;
     });
     const empty=group.querySelector('.video-empty');
-    const groupMatches=!query||groupTitle.includes(query);
+    const groupMatches=productMatches&&(!query||groupTitle.includes(query));
     if(empty) empty.hidden=!groupMatches;
-    group.hidden=query ? groupVisible===0&&!groupMatches : false;
+    group.hidden=!productMatches||(query&&groupVisible===0&&!groupMatches);
     if(query&&!group.hidden) group.open=true;
     visible+=groupVisible;
   });
-  document.getElementById('video-results').textContent=visible+' vídeo'+(visible===1?'':'s')+' encontrado'+(visible===1?'':'s');
+  document.getElementById('video-results').textContent=visible+' vídeo'+(visible===1?'':'s')+' em '+videoProductLabels[activeVideoProduct];
 }
 function toggleVideoGroups(open){
   document.querySelectorAll('.playlist-group:not([hidden])').forEach(group=>group.open=open);
 }
 document.getElementById('video-search').addEventListener('input',filterVideos);
+filterVideos();
 function showTab(name){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id==='tab-'+name));

@@ -485,13 +485,12 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
               </div>
             </div>
             <div class="device">
-              <div class="device-name">Clientes APK MBTratos (não instalar sem autorização)</div>
+              <div class="device-name">Vídeo instrucional — Integração</div>
               <div class="device-actions">
-                <a class="btn-sm btn-photo" href="https://docs.google.com/spreadsheets/d/1N0KvTF2WRlZ1pB_CCtyjJI4XT_9zIwzSptiNsdr43co/edit?gid=0#gid=0" target="_blank" rel="noopener noreferrer">Lista</a>
+                <a class="btn-sm btn-photo" href="https://drive.google.com/file/d/1wRin55apWqYVpiIMw-gQzV82Ri_VOGeI/view" target="_blank" rel="noopener noreferrer">Vídeo</a>
               </div>
             </div>
           </div>
-          <div class="note"><strong>Atenção:</strong> A APK do MB Tratos não deve ser instalada sem autorização. Consulte a lista de clientes autorizados antes de qualquer instalação.</div>
         </div>
       </div>
     </div>
@@ -502,16 +501,6 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
     <div class="section-header">
       <h2>Vídeos instrucionais</h2>
       <p>Catálogo completo separado por produto: 178 vídeos em 27 categorias</p>
-    </div>
-    <div class="videos-grid video-highlights">
-      <a class="video-card" href="https://drive.google.com/file/d/1wRin55apWqYVpiIMw-gQzV82Ri_VOGeI/view" target="_blank" rel="noopener noreferrer">
-        <div class="video-thumb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div><h3>Vídeo instrucional — Integração</h3><p>Google Drive</p></div>
-      </a>
-      <a class="video-card" href="https://drive.google.com/file/d/1CTv81eodLgQcjMsx7G9rEgkdCqprWKYF/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-        <div class="video-thumb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-        <div><h3>Espelhamento RFeed e MB Tratos</h3><p>Google Drive</p></div>
-      </a>
     </div>
     <div class="video-product-filters" aria-label="Produto dos vídeos">
       <button type="button" class="video-product-btn active" data-video-product="web" aria-pressed="true" onclick="setVideoProduct('web',this)">MB Web <span>104</span></button>
@@ -1608,6 +1597,7 @@ function setVideoProduct(product,button){
 function filterVideos(){
   const query=normalizeSearch(document.getElementById('video-search').value.trim());
   let visible=0;
+  let visibleCategory=0;
   document.querySelectorAll('.playlist-group').forEach(group=>{
     const productMatches=group.dataset.product===activeVideoProduct;
     const groupTitle=normalizeSearch(group.querySelector('.playlist-title').textContent);
@@ -1621,6 +1611,11 @@ function filterVideos(){
     const groupMatches=productMatches&&(!query||groupTitle.includes(query));
     if(empty) empty.hidden=!groupMatches;
     group.hidden=!productMatches||(query&&groupVisible===0&&!groupMatches);
+    if(!group.hidden){
+      visibleCategory++;
+      const index=group.querySelector('.playlist-index');
+      if(index) index.textContent=String(visibleCategory).padStart(2,'0');
+    }
     if(query&&!group.hidden) group.open=true;
     visible+=groupVisible;
   });

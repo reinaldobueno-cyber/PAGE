@@ -115,20 +115,38 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
 }
 @media(max-width:520px){.device-list{grid-template-columns:1fr}}
 
-.vid-tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
-.vid-tab{padding:9px 16px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--muted);font-weight:500;font-size:.85rem;cursor:pointer}
-.vid-tab.active{background:#fff;color:#0a4f5c;font-weight:600;border-color:#fff}
-.vid-panel{display:none}
-.vid-panel.active{display:block}
-.vid-playlist{display:inline-flex;align-items:center;gap:8px;background:rgba(255,0,0,.12);border:1px solid rgba(255,80,80,.35);color:#fca5a5;padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:600;font-size:.85rem;margin-bottom:14px}
+.video-highlights{margin-bottom:22px}
+.video-tools{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:14px;padding:16px;margin-bottom:14px}
+.video-tools label{display:block;font-size:.78rem;font-weight:600;color:var(--muted);margin-bottom:7px}
+.video-search-row{display:flex;gap:8px;flex-wrap:wrap}
+.video-search-row input{flex:1;min-width:240px;background:rgba(0,0,0,.22);border:1px solid var(--border);border-radius:9px;color:#fff;padding:10px 12px;font:inherit;outline:none}
+.video-search-row input:focus{border-color:#5eead4;box-shadow:0 0 0 3px rgba(94,234,212,.12)}
+.video-search-row input::placeholder{color:#7fa6ad}
+.video-search-row button{background:transparent;border:1px solid var(--border);border-radius:9px;color:var(--text);padding:9px 12px;font:inherit;font-size:.8rem;cursor:pointer}
+.video-search-row button:hover{background:rgba(255,255,255,.08)}
+#video-results{font-size:.76rem;color:var(--muted);margin-top:8px}
+.playlist-catalog{display:grid;gap:9px}
+.playlist-group{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+.playlist-group[hidden]{display:none}
+.playlist-group summary{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;padding:13px 15px;cursor:pointer;list-style:none}
+.playlist-group summary::-webkit-details-marker{display:none}
+.playlist-group summary:hover{background:rgba(255,255,255,.05)}
+.playlist-index{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:8px;background:rgba(45,212,191,.12);color:#5eead4;font-size:.72rem;font-weight:700}
+.playlist-title{font-size:.9rem;font-weight:650}
+.playlist-count{font-size:.72rem;color:var(--muted);white-space:nowrap}
+.playlist-body{border-top:1px solid var(--border);padding:14px}
+.vid-playlist{display:inline-flex;align-items:center;gap:8px;background:rgba(255,0,0,.12);border:1px solid rgba(255,80,80,.35);color:#fca5a5;padding:8px 14px;border-radius:10px;text-decoration:none;font-weight:600;font-size:.82rem;margin-bottom:12px}
 .vid-playlist:hover{background:rgba(255,0,0,.2);color:#fff}
 .vid-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:8px}
 .vid-item{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:10px;padding:12px 14px;text-decoration:none;color:inherit;transition:.15s}
+.vid-item[hidden]{display:none}
 .vid-item:hover{border-color:rgba(167,243,208,.4);background:rgba(255,255,255,.08)}
 .vid-item .play{width:28px;height:28px;border-radius:8px;background:#cc0000;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .vid-item .play svg{width:12px;height:12px;fill:#fff}
 .vid-item strong{display:block;font-size:.86rem;font-weight:600;margin-bottom:2px}
 .vid-item span{font-size:.75rem;color:var(--muted)}
+.video-empty{font-size:.84rem;color:var(--muted)}
+@media(max-width:600px){.playlist-group summary{grid-template-columns:auto 1fr}.playlist-count{grid-column:2}.video-search-row input{min-width:100%}}
 
 </style>
 </head>
@@ -365,151 +383,1062 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
   <div class="section-inner">
     <div class="section-header">
       <h2>Vídeos instrucionais</h2>
-      <p>Playlists oficiais MultSoft no YouTube — por produto</p>
+      <p>Catálogo completo do sumário oficial: 178 vídeos em 27 categorias</p>
     </div>
-    <div class="vid-tabs">
-      <button type="button" class="vid-tab active" data-vid="geral" onclick="showVid('geral')">Integração</button>
-      <button type="button" class="vid-tab" data-vid="curral" onclick="showVid('curral')">MB Curral</button>
-      <button type="button" class="vid-tab" data-vid="web" onclick="showVid('web')">MB Web</button>
-      <button type="button" class="vid-tab" data-vid="desktop" onclick="showVid('desktop')">Desktop</button>
-      <button type="button" class="vid-tab" data-vid="tratos" onclick="showVid('tratos')">MB Tratos</button>
+    <div class="videos-grid video-highlights">
+      <a class="video-card" href="https://drive.google.com/file/d/1wRin55apWqYVpiIMw-gQzV82Ri_VOGeI/view" target="_blank" rel="noopener noreferrer">
+        <div class="video-thumb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div><h3>Vídeo instrucional — Integração</h3><p>Google Drive</p></div>
+      </a>
+      <a class="video-card" href="https://drive.google.com/file/d/1CTv81eodLgQcjMsx7G9rEgkdCqprWKYF/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+        <div class="video-thumb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+        <div><h3>Espelhamento RFeed e MB Tratos</h3><p>Google Drive</p></div>
+      </a>
     </div>
-
-    <div id="vid-geral" class="vid-panel active">
-      <div class="videos-grid">
-        <a class="video-card" href="https://drive.google.com/file/d/1wRin55apWqYVpiIMw-gQzV82Ri_VOGeI/view" target="_blank" rel="noopener noreferrer">
-          <div class="video-thumb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><h3>Vídeo instrucional — Integração</h3><p>Google Drive</p></div>
-        </a>
-        <a class="video-card" href="https://drive.google.com/file/d/1CTv81eodLgQcjMsx7G9rEgkdCqprWKYF/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-          <div class="video-thumb"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><h3>Espelhamento RFeed e MB Tratos</h3><p>Google Drive</p></div>
-        </a>
+    <div class="video-tools">
+      <label for="video-search">Buscar no catálogo</label>
+      <div class="video-search-row">
+        <input id="video-search" type="search" placeholder="Ex.: GTA, financeiro, reprodução..." autocomplete="off">
+        <button type="button" onclick="toggleVideoGroups(true)">Expandir todas</button>
+        <button type="button" onclick="toggleVideoGroups(false)">Recolher</button>
       </div>
+      <p id="video-results" aria-live="polite">178 vídeos encontrados</p>
     </div>
-
-    <div id="vid-curral" class="vid-panel">
-      <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw5OP3j2iIRw9SptLvinG2N8" target="_blank" rel="noopener noreferrer">▶ Playlist APP MB Curral</a>
-      <div class="vid-list">
-        <a class="vid-item" href="https://youtube.com/shorts/eVo4nDyX9Kc?feature=share" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>1. Como realizar carga inicial — MB CURRAL</strong><span>YouTube Shorts</span></div>
-        </a>
-      </div>
-    </div>
-
-    <div id="vid-web" class="vid-panel">
-      <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv" target="_blank" rel="noopener noreferrer">▶ Playlist SISBOV / MultBovinos WEB</a>
-      <div class="vid-list">
-        <a class="vid-item" href="https://www.youtube.com/watch?v=K_UFJyYb9t8&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=1" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>1. Atualização conferência de dados BND</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=1N0mM0wgl_I&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=2" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>2. Configuração SISBOV</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=tw-IxJs9Rw4&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=3" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>3. Cadastro estoque de brincos</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=yKHcoLpPevE&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=4" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>4. Cadastro de GTA Entrada</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=UzQS9KEb1mc&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=5" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>5. Anexo XX — Comunicado de saída de animais</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=CTTtq9yCMS8&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=6" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>6. Anexo XXI — Saída de Código de Barras</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=Htle8qRGsoM&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=7" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>7. Anexo XXII — Comunicado de Morte de Animais</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=BOTWwotdtXg&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=8" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>8. Anexo XXIII — Identificação Individual</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=uH5itQt8N9E&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=9" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>9. Anexo XXIV — Reidentificação</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=RyloqHwJsjI&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=10" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>10. Atualização / conferência de dados BND</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=3dDq2k-r7F0&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=11" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>11. Como realizar cadastro de GTA Entrada</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=utfgEahmM7s&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=12" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>12. Cadastro estoque de brincos</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=ItbUweQiIH4&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=13" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>13. Como consultar categoria de GTA</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=pX0yKGdHpr4&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=14" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>14. Configuração inicial Sisbov</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=_HA4JmMv4N0&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=15" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>15. Relatório de carga inicial</strong><span>SISBOV WEB</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=YDdH5Ge47Fg&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=16" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>16. Solicitação de GTA</strong><span>SISBOV WEB</span></div>
-        </a>
-      </div>
-      <p style="margin:18px 0 10px;font-size:.9rem;color:var(--muted);font-weight:600">Configurações gerais — MultBovinos WEB</p>
-      <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw5eATAHwsMf9SJpC6IW8mFB" target="_blank" rel="noopener noreferrer">▶ Playlist Configurações Gerais WEB</a>
-      <div class="vid-list" style="margin-top:10px">
-        <a class="vid-item" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw5eATAHwsMf9SJpC6IW8mFB" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>Cadastro de frigorífico, estabelecimentos, contatos e usuários</strong><span>MultBovinos WEB</span></div>
-        </a>
-      </div>
-      <p style="margin:18px 0 10px;font-size:.9rem;color:var(--muted);font-weight:600">Infraestrutura — WEB</p>
-      <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw7FekVVK1Ha_jDvm5PjxDtI" target="_blank" rel="noopener noreferrer">▶ Playlist Infraestrutura WEB</a>
-      <div class="vid-list" style="margin-top:10px">
-        <a class="vid-item" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw7FekVVK1Ha_jDvm5PjxDtI" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>Dispositivos móveis e usuários MultBovinos WEB</strong><span>Infraestrutura</span></div>
-        </a>
-      </div>
-    </div>
-
-    <div id="vid-desktop" class="vid-panel">
-      <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw7UdwQOEenQtCj-VR09LHcm" target="_blank" rel="noopener noreferrer">▶ Playlist SISBOV Desktop</a>
-      <div class="vid-list">
-        <a class="vid-item" href="https://www.youtube.com/watch?v=EW5NYKu5dzg&amp;list=PLGx5fp9_gTw7UdwQOEenQtCj-VR09LHcm&amp;index=1" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>1. Habilitar advertências</strong><span>SISBOV DESKTOP</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/watch?v=dCm5mh3vlKk&amp;list=PLGx5fp9_gTw7UdwQOEenQtCj-VR09LHcm&amp;index=2" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>2. Como realizar Reidentificação</strong><span>SISBOV DESKTOP</span></div>
-        </a>
-      </div>
-    </div>
-
-    <div id="vid-tratos" class="vid-panel">
-      <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw4vJV4kIJq2co9CUK96yOak" target="_blank" rel="noopener noreferrer">▶ Playlist Engorda / Confinamento / MB Tratos</a>
-      <div class="vid-list">
-        <a class="vid-item" href="https://drive.google.com/file/d/1CTv81eodLgQcjMsx7G9rEgkdCqprWKYF/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>Espelhamento RFeed Mirror e MB Tratos</strong><span>Google Drive</span></div>
-        </a>
-        <a class="vid-item" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw4vJV4kIJq2co9CUK96yOak" target="_blank" rel="noopener noreferrer">
-          <div class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          <div><strong>Configuração Espelhamento MB Tratos e confinamento</strong><span>YouTube</span></div>
-        </a>
-      </div>
+    <div id="video-catalog" class="playlist-catalog">
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">01</span>
+          <span class="playlist-title">APP MB CURRAL</span>
+          <span class="playlist-count">1 vídeo</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw5OP3j2iIRw9SptLvinG2N8" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://youtube.com/shorts/eVo4nDyX9Kc?feature=share" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como realizar carga inicial - MB CURRAL</strong><span>APP MB CURRAL</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">02</span>
+          <span class="playlist-title">SISBOV - DESKTOP</span>
+          <span class="playlist-count">2 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw7UdwQOEenQtCj-VR09LHcm" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=EW5NYKu5dzg&amp;list=PLGx5fp9_gTw7UdwQOEenQtCj-VR09LHcm&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Habilitar advertências - SISBOV DESKTOP</strong><span>SISBOV - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=dCm5mh3vlKk&amp;list=PLGx5fp9_gTw7UdwQOEenQtCj-VR09LHcm&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Como realizar Reidentificação - SISBOV DESKTOP</strong><span>SISBOV - DESKTOP</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">03</span>
+          <span class="playlist-title">SISBOV - WEB</span>
+          <span class="playlist-count">16 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=K_UFJyYb9t8&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Atualização conferência de dados BND</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=1N0mM0wgl_I&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Configuração SISBOV</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=tw-IxJs9Rw4&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. CADASTRO ESTOQUE DE BRINCOS SISBOV WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=yKHcoLpPevE&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Cadastro de GTA Entrada</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=UzQS9KEb1mc&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Anexo XX, Comunicado de saída de animais - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=CTTtq9yCMS8&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=6&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Anexo XXI, Saída de Código de Barras - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Htle8qRGsoM&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. Anexo XXII, Comunicado de Morte de Animais - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=BOTWwotdtXg&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=8&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. Anexo XXIII, Identificação Individual - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=uH5itQt8N9E&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=9&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>9. Anexo XXIV, Reidentificação - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=RyloqHwJsjI&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=10&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>10. Atualização / conferência de dados BND - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=3dDq2k-r7F0&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=11&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>11. Como realizar cadastro de GTA Entrada - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=utfgEahmM7s&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=12&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>12. Cadastro estoque de brincos - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=ItbUweQiIH4&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=13&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>13. Como consultar categoria de GTA - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=pX0yKGdHpr4&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=14&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>14. Configuração inicial Sisbov - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=_HA4JmMv4N0&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=15&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>15. Relatório de carga inicial - SISBOV WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=YDdH5Ge47Fg&amp;list=PLGx5fp9_gTw6FsUZNAQn5wczgbavVj9Zv&amp;index=16&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>16. Solicitação de GTA - WEB</strong><span>SISBOV - WEB</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">04</span>
+          <span class="playlist-title">REPRODUÇÃO - DESKTOP</span>
+          <span class="playlist-count">8 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw7yBTcs57h4mwIjPv2011G6" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=32Eh03OVo1c&amp;list=PLGx5fp9_gTw7yBTcs57h4mwIjPv2011G6&amp;index=1&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como inserir repasse em fêmeas que estão em estação de monta IA - DESKTOP</strong><span>REPRODUÇÃO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=PbjsbedvcxE&amp;list=PLGx5fp9_gTw7yBTcs57h4mwIjPv2011G6&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Cadastro de touro múltiplo - DESKTOP</strong><span>REPRODUÇÃO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=a78J2kwXzuY&amp;list=PLGx5fp9_gTw7yBTcs57h4mwIjPv2011G6&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Como criar e adicionar animais em um lote de estação de monta IA - DESKTOP</strong><span>REPRODUÇÃO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=MAbK1syjYa4&amp;list=PLGx5fp9_gTw7yBTcs57h4mwIjPv2011G6&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Como lançar Diagnóstico de Gestação - DESKTOP</strong><span>REPRODUÇÃO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=ZoB18noigvM&amp;list=PLGx5fp9_gTw7yBTcs57h4mwIjPv2011G6&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Como fazer Lançamento de cobertura - DESKTOP</strong><span>REPRODUÇÃO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=9Cm0OOa-_GE&amp;list=PLGx5fp9_gTw7yBTcs57h4mwIjPv2011G6&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Lançamento de TE por Aspiração - DESKTOP</strong><span>REPRODUÇÃO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=ZgNMWTru67o&amp;list=PLGx5fp9_gTw7yBTcs57h4mwIjPv2011G6&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. Como lançar partos - DESKTOP</strong><span>REPRODUÇÃO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=NtiBhUfzeoA&amp;list=PLGx5fp9_gTw7yBTcs57h4mwIjPv2011G6&amp;index=8&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. Relatório Fêmeas CUP - DESKTOP</strong><span>REPRODUÇÃO - DESKTOP</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">05</span>
+          <span class="playlist-title">REPRODUÇÃO - IVF</span>
+          <span class="playlist-count">0 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw4IHYWhBPaklKuNsvfps5hp" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <p class="video-empty">O documento contém a playlist, mas não enumera vídeos nesta categoria.</p>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">06</span>
+          <span class="playlist-title">REPRODUÇÃO - WEB</span>
+          <span class="playlist-count">16 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=r9wHnAU5PkE&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=1&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como emitir Relatório de fêmeas a parir - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=QOR81fXvovc&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Como Lançar resultado automático para fêmeas - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=m_vqrNQLW4c&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Lançamento de descarte de reprodutor - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=cwQqe-0rcYs&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Animais para desmama - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=_E1QLVJGbfc&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Aplicação de Protocolo - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Uc-mGe4gppk&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Aspirações para ovocitos - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=dKz5iXN7hgs&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. Cadastro de motivos de descarte - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=OXNZGJ1WYZM&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=8&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. Cadastro de protocolo - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Yxkz_VJ-b6Y&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=9&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>9. Como criar um lote de estação de monta - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=60SlAPWAn3s&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=10&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>10. Como lançar DG - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=XBy0jRvEP3w&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=11&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>11. Como lançar repasse - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=hVVn_EowWO8&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=12&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>12. Como Visualizar Analise de Partida por Touro - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=ZUMx8GyOu1Y&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=13&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>13. Configurar estação de monta - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=8n_dYcvw6PM&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=14&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>14. Como Criar grupo de touro múltiplo - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=LYm6qDRs-uE&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=15&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>15. Como realizar Entrada de sêmen - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Epgn4U_jWTA&amp;list=PLGx5fp9_gTw4-LaGcd6KV_72qukmmzJK9&amp;index=16&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>16. Lançamento de cobertura - WEB</strong><span>REPRODUÇÃO - WEB</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">07</span>
+          <span class="playlist-title">REPRODUÇÃO - MBIATF</span>
+          <span class="playlist-count">4 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw45gNmBP4-LsPHN_VoAxc8x" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=ooRREcW0ct0&amp;list=PLGx5fp9_gTw45gNmBP4-LsPHN_VoAxc8x&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como lançar parto no App</strong><span>REPRODUÇÃO - MBIATF</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=ME_SViwmQww&amp;list=PLGx5fp9_gTw45gNmBP4-LsPHN_VoAxc8x&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Aplicação de protocolo e inserção no lote - IATF</strong><span>REPRODUÇÃO - MBIATF</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=S7Ad_Se98fU&amp;list=PLGx5fp9_gTw45gNmBP4-LsPHN_VoAxc8x&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Conferência de lote de estação + DG - MBIATF</strong><span>REPRODUÇÃO - MBIATF</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=B7OlSIez0VY&amp;list=PLGx5fp9_gTw45gNmBP4-LsPHN_VoAxc8x&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Descarte de reprodutores - MBIATF</strong><span>REPRODUÇÃO - MBIATF</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">08</span>
+          <span class="playlist-title">PMG - WEB</span>
+          <span class="playlist-count">2 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw6QcwBo9k-M_2oZz0j1xNJp" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=RpvaSjisbGA&amp;list=PLGx5fp9_gTw6QcwBo9k-M_2oZz0j1xNJp&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Cadastro ANCP - WEB</strong><span>PMG - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=wrwimET8hn0&amp;list=PLGx5fp9_gTw6QcwBo9k-M_2oZz0j1xNJp&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Pesagem ANCP - WEB</strong><span>PMG - WEB</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">09</span>
+          <span class="playlist-title">PMG - DESKTOP</span>
+          <span class="playlist-count">3 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw4iaWRfd_Hmr_Wtv247Ctxm" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=RydbofSyM4Q&amp;list=PLGx5fp9_gTw4iaWRfd_Hmr_Wtv247Ctxm&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como emitir arquivo de cadastro ANCP - DESKTOP</strong><span>PMG - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Pe93HQtJCVo&amp;list=PLGx5fp9_gTw4iaWRfd_Hmr_Wtv247Ctxm&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Pesagem ANCP - DESKTOP</strong><span>PMG - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Tu61l590_tY&amp;list=PLGx5fp9_gTw4iaWRfd_Hmr_Wtv247Ctxm&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Como e feita a Inclusão de Safra - DESKTOP</strong><span>PMG - DESKTOP</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">10</span>
+          <span class="playlist-title">APP - MS TASK</span>
+          <span class="playlist-count">4 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw7ZoDzHIgoenj2YjWkvk0_b" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://youtube.com/shorts/nYVFenHOf64?feature=share" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Limpeza de dados - MS Task</strong><span>APP - MS TASK</span></div>
+                    </a>
+                    <a class="vid-item" href="https://youtube.com/shorts/8Vmfn-JMjkM?feature=share" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Como realizar lançamento de Manutenção - MS TASK</strong><span>APP - MS TASK</span></div>
+                    </a>
+                    <a class="vid-item" href="https://youtube.com/shorts/ec4mcV0TDCE?feature=share" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Movimentação - MS TASK</strong><span>APP - MS TASK</span></div>
+                    </a>
+                    <a class="vid-item" href="https://youtube.com/shorts/ngabSR_f0ZU?feature=share" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Como realizar Tratos - MS TASK</strong><span>APP - MS TASK</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">11</span>
+          <span class="playlist-title">FINANCEIRO - WEB</span>
+          <span class="playlist-count">18 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=07lgxgObwWU&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Cadastro de Centro de Custo - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=5tYTL9LXEVc&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Cadastro de Contas Bancarias - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=b8FCpJMpavI&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Cadastro de Contas - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=mWKYKCnUSW4&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Cadastro de Grupo de Contas - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=h6hGYY-EI68&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Como realizar emissão de relatório d Conferencia LCDPR - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=wTlcDfwcg34&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Contas a pagar e Receber com Parcelas lançadas - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=evCB_QIm0Bw&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. Como cadastrar custo pecuário - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=nBwVo1UChQI&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=8&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. Emissão de boletos - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=GKoNsOXLgSM&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=9&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>9. Como realizar cadastro das forma de pagamento - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=h6HIZoPqn4Q&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=10&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>10. Como realizar emissão do relatório geração do Arquivo LCDPR - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=sXDtlmqM1vw&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=11&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>11. Como emitir relatório de gerenciamento de orçamento - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=bGiLk5nPnXg&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=12&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>12. Importação de custos de aquisição dos animais por peso - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=5IG9TJpqed4&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=13&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>13. Como cadastrar multas e juros dos boletos - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=2m0h_Be9sTk&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=14&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>14. Como cadastrar projetos financeiros - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=jWX5iZOLQYg&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=15&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>15. Como realizar baixa de contas a pagar e receber - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=4F0hf-gQk60&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=16&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>16. Como emitir relatório de movimentações financeiras - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=zQZEqWl1G8w&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=17&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>17. Como realizar Relatório fluxo de caixa - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=aRhAw6zqHH4&amp;list=PLGx5fp9_gTw6NdHL1LXbNoDdnwWbz9B_6&amp;index=18&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>18. Como realizar o lançamento de transferência bancaria - WEB</strong><span>FINANCEIRO - WEB</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">12</span>
+          <span class="playlist-title">ESTOQUE DE MATERIAIS - WEB</span>
+          <span class="playlist-count">5 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw78gePg8LQQOxLm6m8PpOfh" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=A15EV8IcVwo&amp;list=PLGx5fp9_gTw78gePg8LQQOxLm6m8PpOfh&amp;index=1&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Transferência de produto entre fazendas - WEB</strong><span>ESTOQUE DE MATERIAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=AeL76nuMB5M&amp;list=PLGx5fp9_gTw78gePg8LQQOxLm6m8PpOfh&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. MOVIMENTAÇÃO DE ANIMAIS - WEB</strong><span>ESTOQUE DE MATERIAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=hT7X6MDH-l4&amp;list=PLGx5fp9_gTw78gePg8LQQOxLm6m8PpOfh&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Como realizar Saída de produto consumo geral - WEB</strong><span>ESTOQUE DE MATERIAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=sdzE_hdDMyU&amp;list=PLGx5fp9_gTw78gePg8LQQOxLm6m8PpOfh&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Cadastro e entrada de produtos - WEB</strong><span>ESTOQUE DE MATERIAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=v7Igedqz0JU&amp;list=PLGx5fp9_gTw78gePg8LQQOxLm6m8PpOfh&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Relatório Estoque de Materiais - WEB</strong><span>ESTOQUE DE MATERIAIS - WEB</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">13</span>
+          <span class="playlist-title">ESTOQUE DE MATERIAS - DESKTOP</span>
+          <span class="playlist-count">1 vídeo</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw5HskvRXk_n3WUXd8CjixZ7" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=qu4P2yX9QaM&amp;list=PLGx5fp9_gTw5HskvRXk_n3WUXd8CjixZ7&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como realizar a entrada de produtos - DESKTOP</strong><span>ESTOQUE DE MATERIAS - DESKTOP</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">14</span>
+          <span class="playlist-title">Estoque de animais - APP MB CURRAL</span>
+          <span class="playlist-count">3 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw5eq7UXBnFVA6AShIoS8dW4" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://youtube.com/shorts/JSR5Nyrekxg?feature=share" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como realizar uma Venda de animais - APP MB CURRAL</strong><span>Estoque de animais - APP MB CURRAL</span></div>
+                    </a>
+                    <a class="vid-item" href="https://youtube.com/shorts/x1_5WRxeL_Y?feature=share" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Como realizar Inventário de Animais - MB IATF</strong><span>Estoque de animais - APP MB CURRAL</span></div>
+                    </a>
+                    <a class="vid-item" href="https://youtube.com/shorts/LhtjwdD4Eu4?feature=share" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Entrada de animais - APP MB CURRAL</strong><span>Estoque de animais - APP MB CURRAL</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">15</span>
+          <span class="playlist-title">ESTOQUE DE ANIMAIS - WEB</span>
+          <span class="playlist-count">14 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=A_qkI6992hM&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como realizar emissão do Relatório de Estoque de Animais Analítico</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=FuNnHlFzr8k&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=2&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Relatório de análise de resultado de vendas - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=5cyJ3nS8_no&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Como fazer a recepção de animais - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=NOydLa2JjOE&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Como realizar movimentação entre pastos - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=umYI94eYt_A&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Como realizar cadastro de localidade e Embarque - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=ttttSHoA2Fc&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Lançamento de Venda de animais - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=uJA2OBhMvPo&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. Como realizar lançamento de Mortes - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=bbMwGt44L7o&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=8&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. Importação de pesos - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=8YprxT187ag&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=9&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>9. Como realizar Importação de animais - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=3OhG2zOw-a4&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=10&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>10. Como verificar os registros de inventario - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=f0d2AMDCfrc&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=11&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>11. Como cadastrar localidade - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=26sEwR3fx6o&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=12&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>12. Cadastro de advertência - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=qTDikd_zqdo&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=13&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>13. Aplicação de vacinas e tratamentos - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=mIgqKHzV5q8&amp;list=PLGx5fp9_gTw54cy-gSbdTGpInlQEWokJT&amp;index=14&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>14. Como realizar lançamento da Alteração de Animais em Grupo - WEB</strong><span>ESTOQUE DE ANIMAIS - WEB</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">16</span>
+          <span class="playlist-title">APP MB TRATOS</span>
+          <span class="playlist-count">8 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw7m8nHs9GVbSI7ljQovGBqV" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=hQgU46m6DnA&amp;list=PLGx5fp9_gTw7m8nHs9GVbSI7ljQovGBqV&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como realizar lançamentos Score de fezes - MB TRATOS</strong><span>APP MB TRATOS</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Os0mzPv-5DM&amp;list=PLGx5fp9_gTw7m8nHs9GVbSI7ljQovGBqV&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. REGISTRO DE TAG - MB TRATOS</strong><span>APP MB TRATOS</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=rzogqn4qHjA&amp;list=PLGx5fp9_gTw7m8nHs9GVbSI7ljQovGBqV&amp;index=3&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. MB TRATOS</strong><span>APP MB TRATOS</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=RpjaIfEQg5k&amp;list=PLGx5fp9_gTw7m8nHs9GVbSI7ljQovGBqV&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Leitura de cocho - MB TRATOS</strong><span>APP MB TRATOS</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Ln3Q32iPfMc&amp;list=PLGx5fp9_gTw7m8nHs9GVbSI7ljQovGBqV&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Fabricação de ração - MB TRATOS</strong><span>APP MB TRATOS</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=iXwhb6DD4Qg&amp;list=PLGx5fp9_gTw7m8nHs9GVbSI7ljQovGBqV&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Exclusão de dados Coletados - MB TRATOS</strong><span>APP MB TRATOS</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=gWszyk_B30Y&amp;list=PLGx5fp9_gTw7m8nHs9GVbSI7ljQovGBqV&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. Configuração de Balança e Fornecimento - MB TRATOS</strong><span>APP MB TRATOS</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=uadCY5oRBo8&amp;list=PLGx5fp9_gTw7m8nHs9GVbSI7ljQovGBqV&amp;index=8&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. Como realizar o Fornecimento de Ração - MB TRATOS</strong><span>APP MB TRATOS</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">17</span>
+          <span class="playlist-title">CONFINAMENTO - DESKTOP</span>
+          <span class="playlist-count">11 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=jWhcwlu2DcY&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como realizar o lançamento de Tratos - DESKTOP</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=0cPHqkGD5_c&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Como realizar lançamento de Sobra de cocho - DESKTOP</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=VqjMZTCMuaA&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Como cadastrar um Programa Nutricional - DESKTOP</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=KO94yos0RxM&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Como cadastrar e produzir uma Pré mistura - Desktop</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=od1vYymjXZo&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Como emitir relatório planilha de Arraçoamento diário - DESKTOP</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=3dBSePq6MS8&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Mudança de dieta - Desktop</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=qQpWqHpV6Qo&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. MOVIMENTAÇÕES DE ANIMAIS NO CONFINAMENTO - DESKTOP</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=hL_9xiZxw4U&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=8&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. FORMAÇÃO DE LOTE DE CONFINAMENTO - DESKTOP</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Fl-lAaaEYBw&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=9&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>9. Cadastro de Ração - Desktop</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=bmlL8knjoow&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=10&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>10. Cadastro de Ingrediente - DESKTOP</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=mtIQHYGF8Ao&amp;list=PLGx5fp9_gTw5UAFCRrP7yuEO9Cs_WgFSl&amp;index=11&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>11. Atualização de Matéria seca - DESKTOP</strong><span>CONFINAMENTO - DESKTOP</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">18</span>
+          <span class="playlist-title">Infraestrutura - WEB</span>
+          <span class="playlist-count">2 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw7FekVVK1Ha_jDvm5PjxDtI" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=f-M2qxq8MkU&amp;list=PLGx5fp9_gTw7FekVVK1Ha_jDvm5PjxDtI&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como resolver quantidade de dispositivos móveis excedidos - WEB</strong><span>Infraestrutura - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=yBZIIUbWAqQ&amp;list=PLGx5fp9_gTw7FekVVK1Ha_jDvm5PjxDtI&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Criando e deletando Usuários - MULTBOVINOS WEB</strong><span>Infraestrutura - WEB</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">19</span>
+          <span class="playlist-title">CONFIGURAÇÕES GERAIS - MULTBOVINOS WEB</span>
+          <span class="playlist-count">4 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw5eATAHwsMf9SJpC6IW8mFB" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Y6opSf7ivqU&amp;list=PLGx5fp9_gTw5eATAHwsMf9SJpC6IW8mFB&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Cadastro de frigorífico - MULTBOVINOS WEB</strong><span>CONFIGURAÇÕES GERAIS - MULTBOVINOS WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=doK6vAdu3ZM&amp;list=PLGx5fp9_gTw5eATAHwsMf9SJpC6IW8mFB&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Cadastro Estabelecimentos Rurais Externos - MULTBOVINOS WEB</strong><span>CONFIGURAÇÕES GERAIS - MULTBOVINOS WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=q0kyXEXAXQ4&amp;list=PLGx5fp9_gTw5eATAHwsMf9SJpC6IW8mFB&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Cadastro de Contato - MULTBOVINOS WEB</strong><span>CONFIGURAÇÕES GERAIS - MULTBOVINOS WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=6Ad6hn5MwNs&amp;list=PLGx5fp9_gTw5eATAHwsMf9SJpC6IW8mFB&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. CADASTRAR USUÁRIOS - MULTBOVINOS WEB</strong><span>CONFIGURAÇÕES GERAIS - MULTBOVINOS WEB</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">20</span>
+          <span class="playlist-title">Aplicativo MB IATF</span>
+          <span class="playlist-count">8 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw54Rv9q6vfFBmH3Ouzh7xfq" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=MQGCzVrG1YU&amp;list=PLGx5fp9_gTw54Rv9q6vfFBmH3Ouzh7xfq&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como da entrada identificação pós recepção - MB IATF</strong><span>Aplicativo MB IATF</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=IEvYIjoqsoo&amp;list=PLGx5fp9_gTw54Rv9q6vfFBmH3Ouzh7xfq&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Como realizar carga inicial – APP MB IATF</strong><span>Aplicativo MB IATF</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=SWaYdgkDqpA&amp;list=PLGx5fp9_gTw54Rv9q6vfFBmH3Ouzh7xfq&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Como realizar carga inicial - APP MB IATF</strong><span>Aplicativo MB IATF</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=yQBXvTUQtgo&amp;list=PLGx5fp9_gTw54Rv9q6vfFBmH3Ouzh7xfq&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Como fazer uma Apartação - APP MB IATF</strong><span>Aplicativo MB IATF</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=xiA57sDbov4&amp;list=PLGx5fp9_gTw54Rv9q6vfFBmH3Ouzh7xfq&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. descarte de reprodutores App</strong><span>Aplicativo MB IATF</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=-U8ihw1Bj3E&amp;list=PLGx5fp9_gTw54Rv9q6vfFBmH3Ouzh7xfq&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Conferência de lote de estação + DG</strong><span>Aplicativo MB IATF</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=3-1JMIa4KBs&amp;list=PLGx5fp9_gTw54Rv9q6vfFBmH3Ouzh7xfq&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. Como lançar parto no App</strong><span>Aplicativo MB IATF</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Pb9W5BQqeWE&amp;list=PLGx5fp9_gTw54Rv9q6vfFBmH3Ouzh7xfq&amp;index=8&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. Aplicação de protocolo e inserção no lote de IATF</strong><span>Aplicativo MB IATF</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">21</span>
+          <span class="playlist-title">Agrícola - DESKTOP</span>
+          <span class="playlist-count">3 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw4-KhYUe-VdiJOl8HBNaF01" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=2NOchHYwzww&amp;list=PLGx5fp9_gTw4-KhYUe-VdiJOl8HBNaF01&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Agrícola – Criando novo ciclo de produção e inserindo talhões</strong><span>Agrícola - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=1mVPlo2IYFY&amp;list=PLGx5fp9_gTw4-KhYUe-VdiJOl8HBNaF01&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Agrícola - Aplicação dos descontos de umidade - DESKTOP</strong><span>Agrícola - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=6BHh5pDcmI0&amp;list=PLGx5fp9_gTw4-KhYUe-VdiJOl8HBNaF01&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Como cadastrar um ano agrícola - DESKTOP</strong><span>Agrícola - DESKTOP</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">22</span>
+          <span class="playlist-title">Engorda/Confinamento</span>
+          <span class="playlist-count">6 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw4vJV4kIJq2co9CUK96yOak" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Vc1sghW6Nx0&amp;list=PLGx5fp9_gTw4vJV4kIJq2co9CUK96yOak&amp;index=1&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Configuração Espelhamento MB Tratos</strong><span>Engorda/Confinamento</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=JOFACMDwe6E&amp;list=PLGx5fp9_gTw4vJV4kIJq2co9CUK96yOak&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. MOVIMENTAÇÃO DE ANIMAIS CONF WEB</strong><span>Engorda/Confinamento</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=FqCOxLqsLUM&amp;list=PLGx5fp9_gTw4vJV4kIJq2co9CUK96yOak&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. MB TRATOS</strong><span>Engorda/Confinamento</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=jbhsbXfhi24&amp;list=PLGx5fp9_gTw4vJV4kIJq2co9CUK96yOak&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Lançamento oferta de trato para animais a pasto</strong><span>Engorda/Confinamento</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=r1R7nCLXowU&amp;list=PLGx5fp9_gTw4vJV4kIJq2co9CUK96yOak&amp;index=5&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Formação do lote de confinamento</strong><span>Engorda/Confinamento</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=RlwyVh3j5WE&amp;list=PLGx5fp9_gTw4vJV4kIJq2co9CUK96yOak&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. CRIAÇÃO DE LINHAS E CURRAIS CONF WEB</strong><span>Engorda/Confinamento</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">23</span>
+          <span class="playlist-title">Reprodução - WEB</span>
+          <span class="playlist-count">17 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=dnj-pgptfkA&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Relatorio de femeas a parir</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=VpMXyREWSWY&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Movimentação entre pastos na web</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=4ABBgB-R8E4&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Lançar resultado automático para fêmeas</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=XucRnVJ_VWw&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=4&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. lançamento de descarte de reprodutor pela WEB</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=AcQT_GhEVks&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Lançamento de cobertura na Web</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=dH6iLF3wB18&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Entrada de semen</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=TYvVDs4i8zo&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. Criar grupo de touro múltiplo</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Cp-Fep8w2wk&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=8&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. Configurar estação de monta</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=y0Tpe4q3Vys&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=9&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>9. Como lançar repasse na Web</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=__Y2eY_FFus&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=10&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>10. Como lançar DG na WEB</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=ijIYjDObHxQ&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=11&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>11. Como criar um lote de estação de monta na WEB</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=05w5H3M0wHA&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=12&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>12. Cadastro de protocolo na web</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=OFRqSdLKfnA&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=13&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>13. Cadastro de motivos de descarte</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=jSzIBWKn7Rs&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=14&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>14. Cadastro de advertencia + inclusao para o ani</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=6_tPniOedrY&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=15&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>15. Aspirações para ovocitos pela web</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=WwKKjFnPaSs&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=16&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>16. Aplicação de Protocolo na Web</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=8fiSNXl8zSE&amp;list=PLGx5fp9_gTw5GMzweBmuHiCsOsqG0Lhpm&amp;index=17&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>17. Animais para desmama</strong><span>Reprodução - WEB</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">24</span>
+          <span class="playlist-title">PMG - Desktop</span>
+          <span class="playlist-count">3 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw6gc7DGWFreNp5xCOpQNvKQ" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=HS-k_Jk10Zk&amp;list=PLGx5fp9_gTw6gc7DGWFreNp5xCOpQNvKQ&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Inclusão de Safra</strong><span>PMG - Desktop</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=L2y_XTuyiG4&amp;list=PLGx5fp9_gTw6gc7DGWFreNp5xCOpQNvKQ&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Envio Pesagem ANCP</strong><span>PMG - Desktop</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=UhZ5g3Z5E5I&amp;list=PLGx5fp9_gTw6gc7DGWFreNp5xCOpQNvKQ&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Cadastro ANCP</strong><span>PMG - Desktop</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">25</span>
+          <span class="playlist-title">Infraestrutura - DESKTOP</span>
+          <span class="playlist-count">8 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw7oe2UmAHNxJFHLToCjezPg" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=ys4sTnejPNE&amp;list=PLGx5fp9_gTw7oe2UmAHNxJFHLToCjezPg&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Restrições de Acessos</strong><span>Infraestrutura - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=rlA-cpew0hk&amp;list=PLGx5fp9_gTw7oe2UmAHNxJFHLToCjezPg&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. Restauração de Backup</strong><span>Infraestrutura - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Vehe42RyBBk&amp;list=PLGx5fp9_gTw7oe2UmAHNxJFHLToCjezPg&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Portas COM</strong><span>Infraestrutura - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=NIdBRsnW6-M&amp;list=PLGx5fp9_gTw7oe2UmAHNxJFHLToCjezPg&amp;index=4&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Instalação de Atualização</strong><span>Infraestrutura - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=KxHFLfAohpc&amp;list=PLGx5fp9_gTw7oe2UmAHNxJFHLToCjezPg&amp;index=5&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Fechamento de Sessao</strong><span>Infraestrutura - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=dXrPXsSvyJ0&amp;list=PLGx5fp9_gTw7oe2UmAHNxJFHLToCjezPg&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Criacao de Backup</strong><span>Infraestrutura - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=RWzjMoULQ5M&amp;list=PLGx5fp9_gTw7oe2UmAHNxJFHLToCjezPg&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. Configuração de bastão Allflex</strong><span>Infraestrutura - DESKTOP</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=ya0kFDp_8xc&amp;list=PLGx5fp9_gTw7oe2UmAHNxJFHLToCjezPg&amp;index=8&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. Abertura de Sessão Normal</strong><span>Infraestrutura - DESKTOP</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">26</span>
+          <span class="playlist-title">Financeiro - WEB</span>
+          <span class="playlist-count">10 vídeos</span>
+        </summary>
+        <div class="playlist-body">
+          <a class="vid-playlist" href="https://www.youtube.com/playlist?list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV" target="_blank" rel="noopener noreferrer">▶ Abrir playlist completa</a>
+          <div class="vid-list">
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=cN2ACu0E-e8&amp;list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV&amp;index=1&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Transferencia Bancaria WEB</strong><span>Financeiro - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=sHOPHgIchRA&amp;list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV&amp;index=2&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>2. realizar baixa de contas a pagar e receber</strong><span>Financeiro - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Vot-xcZR2lQ&amp;list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV&amp;index=3&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>3. Geração do Arquivo LCDPR</strong><span>Financeiro - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=hbiPDYG9kRw&amp;list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV&amp;index=4&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>4. Forma de Pagamento WEB</strong><span>Financeiro - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=DxiYQbd5tT4&amp;list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV&amp;index=5&amp;pp=iAQB0gcJCdkKAYcqIYzv" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>5. Contas a Receber com Parcelas lançadas</strong><span>Financeiro - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=yZv4heoV38c&amp;list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV&amp;index=6&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>6. Conferencia LCDPR</strong><span>Financeiro - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=uFts0-pu8xc&amp;list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV&amp;index=7&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>7. Cadastro de Grupo de Contas WEB</strong><span>Financeiro - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=umE-_atTFbc&amp;list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV&amp;index=8&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>8. Cadastro de Contas WEB</strong><span>Financeiro - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=Ys-R0cYyViM&amp;list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV&amp;index=9&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>9. Cadastro de Contas Bancarias WEB</strong><span>Financeiro - WEB</span></div>
+                    </a>
+                    <a class="vid-item" href="https://www.youtube.com/watch?v=JfV9BkP0ipw&amp;list=PLGx5fp9_gTw7UoZd2nousiKCl9oG6UzxV&amp;index=10&amp;pp=iAQB" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>10. Cadastro de Centro de Custo WEB</strong><span>Financeiro - WEB</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
+      <details class="playlist-group">
+        <summary>
+          <span class="playlist-index">27</span>
+          <span class="playlist-title">Configuração ANYDESK</span>
+          <span class="playlist-count">1 vídeo</span>
+        </summary>
+        <div class="playlist-body">
+          <div class="vid-list">
+                    <a class="vid-item" href="https://drive.google.com/file/d/19LZv1k1Y4HNxfMchjKpAyMyqerEZVflQ/view?usp=drive_link" target="_blank" rel="noopener noreferrer">
+                      <div class="play"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></div>
+                      <div><strong>1. Como Cofigurar Anydesk para receber acesso remoto</strong><span>Configuração ANYDESK</span></div>
+                    </a>
+                  </div>
+        </div>
+      </details>
     </div>
   </div>
 </section>
@@ -532,10 +1461,33 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
 </footer>
 
 <script>
-function showVid(name){
-  document.querySelectorAll('.vid-tab').forEach(b=>b.classList.toggle('active',b.dataset.vid===name));
-  document.querySelectorAll('.vid-panel').forEach(p=>p.classList.toggle('active',p.id==='vid-'+name));
+function normalizeSearch(value){
+  return value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 }
+function filterVideos(){
+  const query=normalizeSearch(document.getElementById('video-search').value.trim());
+  let visible=0;
+  document.querySelectorAll('.playlist-group').forEach(group=>{
+    const groupTitle=normalizeSearch(group.querySelector('.playlist-title').textContent);
+    let groupVisible=0;
+    group.querySelectorAll('.vid-item').forEach(item=>{
+      const matches=!query||groupTitle.includes(query)||normalizeSearch(item.textContent).includes(query);
+      item.hidden=!matches;
+      if(matches) groupVisible++;
+    });
+    const empty=group.querySelector('.video-empty');
+    const groupMatches=!query||groupTitle.includes(query);
+    if(empty) empty.hidden=!groupMatches;
+    group.hidden=query ? groupVisible===0&&!groupMatches : false;
+    if(query&&!group.hidden) group.open=true;
+    visible+=groupVisible;
+  });
+  document.getElementById('video-results').textContent=visible+' vídeo'+(visible===1?'':'s')+' encontrado'+(visible===1?'':'s');
+}
+function toggleVideoGroups(open){
+  document.querySelectorAll('.playlist-group:not([hidden])').forEach(group=>group.open=open);
+}
+document.getElementById('video-search').addEventListener('input',filterVideos);
 function showTab(name){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id==='tab-'+name));

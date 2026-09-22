@@ -82,13 +82,14 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
 .company-title:focus-visible{outline:2px solid #7dd3fc;outline-offset:5px;border-radius:4px}
 .company-title strong{font-size:.76rem;letter-spacing:.08em;color:#a7f3d0}
 .company-title span{font-size:.66rem;color:#7dd3fc;background:rgba(56,189,248,.1);border:1px solid rgba(56,189,248,.2);padding:2px 7px;border-radius:999px}
-.company-group .device-list{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.company-group .device-list{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
 .device{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:9px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
 .device:hover{background:rgba(255,255,255,.08)}
 .device-with-thumb{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center}
 .device-with-thumb .device-thumb{grid-row:1/3}
 .device-with-thumb .device-actions{grid-column:2;justify-content:flex-start;flex-wrap:wrap}
-.device-thumb{width:42px;height:54px;object-fit:contain;background:#fff;border-radius:7px;padding:4px;flex-shrink:0}
+.device-thumb{width:58px;height:64px;object-fit:contain;background:#fff;border-radius:8px;padding:4px;flex-shrink:0}
+.device-thumb.is-placeholder{background:linear-gradient(145deg,#0d6673,#073f48);padding:0}
 .device-name{font-size:.84rem;font-weight:500;display:flex;align-items:center;gap:8px;flex:1;min-width:0}
 .device-name::before{content:'';width:6px;height:6px;background:#34d399;border-radius:50%;flex-shrink:0}
 .device-actions{display:flex;gap:5px;flex-shrink:0}
@@ -329,8 +330,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
             <details class="company-group">
               <summary class="company-title"><strong>ALLFLEX</strong><span>2 modelos</span></summary>
               <div class="device-list">
-                <div class="device device-with-thumb"><img class="device-thumb" src="assets/allflex-awr250.webp" alt="Bastão Allflex AWR250 Agrident" width="46" height="58" loading="lazy"><div class="device-name">AWR250 AGRIDENT</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://drive.google.com/file/d/1arnkUO_y4C_3bktaGo89r7gu2sa4shZs/view" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ALLFLEX+AWR250+AGRIDENT+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
-                <div class="device device-with-thumb"><img class="device-thumb" src="assets/allflex-rs420.webp" alt="Bastão Allflex RS420" width="46" height="58" loading="lazy"><div class="device-name">RS420</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ALLFLEX+RS420+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">AWR250 AGRIDENT</div><div class="device-actions"><a class="btn-sm btn-manual" href="https://drive.google.com/file/d/1arnkUO_y4C_3bktaGo89r7gu2sa4shZs/view" target="_blank" rel="noopener noreferrer">Manual</a><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ALLFLEX+AWR250+AGRIDENT+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
+                <div class="device"><div class="device-name">RS420</div><div class="device-actions"><a class="btn-sm btn-photo" href="https://www.google.com/search?q=ALLFLEX+RS420+bast%C3%A3o+eletr%C3%B4nico&tbm=isch" target="_blank" rel="noopener noreferrer">Fotos</a></div></div>
               </div>
             </details>
             <details class="company-group">
@@ -1726,9 +1727,88 @@ function updateCatalogCounts(){
   if(summary) summary.textContent='Catálogo completo separado por produto: '+total+' vídeos em '+categories+' categorias';
 }
 
+const deviceImageFiles={
+  'AWR250 AGRIDENT':'awr250.jpg',
+  'RS420':'rs420.webp',
+  'SRS2':'srs2.png',
+  'SRS2i':'srs2i-thumb.png',
+  'XRP2':'xrp2.png',
+  'XRS2 | XRS2I':'xrs2.png',
+  'HR4':'hr4.webp',
+  'HR5':'hr5.png',
+  'CT002':'ct002.jpg',
+  'CT002 V4':'ct002-v4.jpg',
+  'AT05':'at05.jpg',
+  'PAINEL RFID ALLTAGS 8':'alltags8.jpg',
+  'STICK REDER 380 SDK':'stick-reader-380.png',
+  'RT100 V8':'rt100.jpg',
+  'READ 181 ORANGE':'read181.png',
+  'WS-S02':'ws-s02.png',
+  'XR5000':'xr5000.png',
+  'S3':'s3.png',
+  'S2':'s2.png',
+  'JR5000':'jr5000.png',
+  'W-O':'w0.webp',
+  'TW-1':'tw1.webp',
+  'TW-3':'tw3.webp',
+  'TWR-5':'twr5.png',
+  'KM-3PLUS':'km3plus.png',
+  'KM3-N':'km3n.jpg',
+  'PRIX MGR CAMPO':'prix-mgr-campo.jpg',
+  'PRIX MGR CAMPO V2':'prix-mgr-campo.jpg',
+  'PRIX REBANHO':'prix-rebanho.jpg',
+  'CLASSE III':'valfran-classe3.png',
+  'ICV-05':'icv05.jpg',
+  'HD EASY':'hd-easy.jpg',
+  'WT300-I-PRO':'wt3000.png',
+  'C20':'c20.png',
+  'LE702':'le702.png',
+  'LE703':'le703.jpg',
+  'LEITOR ELETRÔNICO':'zebra.jpg',
+  'Açores ACR 1500 / HeavyDuty':'hd-easy.jpg',
+  'ALFA 3101C':'alfa3101c.png',
+  'Animaltag AT50 / AT55':'at50.jpg',
+  'Coimma KM3 / KM3-Plus / KT40 / W810':'km3plus.png',
+  'Gallagher W310 / W610 / W810':'tw1.webp',
+  'Lider LD1050 / LD2000':'lider-ld1050.png',
+  'Toledo MGR 2000 / 3000 / 4000 / Campo':'prix-mgr-campo.jpg',
+  'Tru-Test S2 / S3 / XR5000 / ID5000':'xr5000.png',
+  'Weightech WT3000 / Valfran VF-Plus':'wt3000.png',
+  'Allflex AWR250 / ASR550 / AFX110':'awr250.jpg',
+  'Gallagher HR5':'hr5.png',
+  'Tru-Test XRS / EID Antena':'xrs2.png',
+  'DATAMARS GES3S / Destron DTR-4':'datamars-ges3s.jpg'
+};
+function devicePlaceholder(name){
+  const initials=name.split(/\s+/).filter(Boolean).slice(0,2).map(part=>part[0]).join('').toUpperCase();
+  const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 64"><rect width="58" height="64" rx="8" fill="#0b5965"/><path d="M18 18h22v25H18z" fill="none" stroke="#7dd3fc" stroke-width="2"/><circle cx="29" cy="48" r="2" fill="#5eead4"/><text x="29" y="35" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="11" font-weight="700">'+initials+'</text></svg>';
+  return 'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg);
+}
+function addDeviceThumbnail(card){
+  const name=card.querySelector('.device-name').textContent.trim();
+  const file=deviceImageFiles[name];
+  const image=document.createElement('img');
+  image.className='device-thumb'+(file?'':' is-placeholder');
+  image.src=file?'assets/devices/'+file:devicePlaceholder(name);
+  image.alt=file?'Foto de '+name:'Miniatura de identificação de '+name;
+  image.width=58;
+  image.height=64;
+  image.loading='lazy';
+  if(!file) image.title='Foto específica ainda não disponível';
+  image.addEventListener('error',()=>{
+    image.onerror=null;
+    image.src=devicePlaceholder(name);
+    image.classList.add('is-placeholder');
+    image.alt='Miniatura de identificação de '+name;
+    image.title='Foto específica ainda não disponível';
+  });
+  card.classList.add('device-with-thumb');
+  card.prepend(image);
+}
 function enhanceDeviceCards(){
   document.querySelectorAll('a.btn-photo[href*="google.com/search"]').forEach(link=>link.textContent='Buscar fotos');
   document.querySelectorAll('#tab-curral .device,#tab-desktop .device').forEach(card=>{
+    addDeviceThumbnail(card);
     const actions=card.querySelector('.device-actions');
     if(actions&&!actions.querySelector('.btn-manual')){
       const unavailable=document.createElement('span');

@@ -86,10 +86,12 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
 .device{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:9px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
 .device:hover{background:rgba(255,255,255,.08)}
 .device-with-thumb{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:center}
-.device-with-thumb .device-thumb{grid-row:1/3}
+.device-with-thumb .device-thumb-trigger{grid-row:1/3}
 .device-with-thumb .device-actions{grid-column:2;justify-content:flex-start;flex-wrap:wrap}
 .device-thumb{width:58px;height:64px;object-fit:contain;background:#fff;border-radius:8px;padding:4px;flex-shrink:0}
 .device-thumb.is-placeholder{background:linear-gradient(145deg,#0d6673,#073f48);padding:0}
+.device-thumb-trigger{display:block;border:0;border-radius:8px;background:transparent;padding:0;cursor:zoom-in;line-height:0}
+.device-thumb-trigger:focus-visible{outline:2px solid #7dd3fc;outline-offset:3px}
 .device-name{font-size:.84rem;font-weight:500;display:flex;align-items:center;gap:8px;flex:1;min-width:0}
 .device-name::before{content:'';width:6px;height:6px;background:#34d399;border-radius:50%;flex-shrink:0}
 .device-actions{display:flex;gap:5px;flex-shrink:0}
@@ -195,19 +197,44 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
 .result-context{display:block;font-size:.7rem;color:var(--muted);margin-top:1px}
 .global-empty{padding:12px;color:var(--muted);font-size:.82rem;text-align:center}
 .device-tools{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:18px}
-.device-filter-row{display:grid;grid-template-columns:minmax(210px,2fr) repeat(3,minmax(135px,1fr));gap:8px}
+.device-filter-row{display:grid;grid-template-columns:minmax(210px,2fr) repeat(4,minmax(125px,1fr));gap:8px}
 .device-filter-row input,.device-filter-row select{width:100%;background:rgba(0,0,0,.22);border:1px solid var(--border);border-radius:9px;color:#fff;padding:10px 11px;font:inherit;font-size:.8rem}
 .device-filter-row select option{color:#062f36;background:#fff}
 .tool-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:9px}
 .tool-actions button,.report-link{background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--text);padding:7px 10px;font:inherit;font-size:.74rem;cursor:pointer;text-decoration:none}
 .tool-actions button:hover,.report-link:hover{background:rgba(255,255,255,.08)}
 #device-results{margin-left:auto;font-size:.72rem;color:var(--muted)}
+.catalog-coverage{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:.72rem;color:var(--muted)}
+.coverage-bar{height:6px;flex:1;max-width:190px;background:rgba(255,255,255,.1);border-radius:999px;overflow:hidden}
+.coverage-bar span{display:block;height:100%;background:#34d399;border-radius:inherit}
 .btn-unavailable{color:#94a3b8;background:rgba(148,163,184,.08);border-color:rgba(148,163,184,.2);cursor:default}
+.btn-detail{color:#e0f2fe;background:rgba(14,165,233,.08);border-color:rgba(125,211,252,.22);cursor:pointer}
 .filter-empty{display:none;padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:10px;margin-bottom:18px}
 .search-highlight{animation:highlight-card 1.8s ease}
 @keyframes highlight-card{0%,35%{box-shadow:0 0 0 3px #5eead4;background:rgba(45,212,191,.18)}100%{box-shadow:none}}
 @media(max-width:850px){.header-inner{width:100%;flex-wrap:wrap}.main-nav{order:3;width:100%;overflow-x:auto;justify-content:flex-start;padding-top:4px;scrollbar-width:thin}.header-cta{margin-left:auto}.device-filter-row{grid-template-columns:1fr 1fr}.device-filter-row input{grid-column:1/-1}}
 @media(max-width:560px){.quick-find{padding:10px 14px}.device-filter-row{grid-template-columns:1fr}#device-results{width:100%;margin-left:0}.header-inner{padding:9px 14px}.header-cta{font-size:.74rem;padding:8px 10px}.main-nav a{font-size:.72rem;padding:6px 8px}}
+
+.device-modal[hidden]{display:none}
+.device-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:18px}
+.device-modal-backdrop{position:absolute;inset:0;border:0;background:rgba(1,18,22,.82);backdrop-filter:blur(5px);cursor:default}
+.device-modal-card{position:relative;width:min(760px,100%);max-height:min(700px,92vh);overflow:auto;background:#073f48;border:1px solid rgba(125,211,252,.25);border-radius:18px;box-shadow:0 24px 70px rgba(0,0,0,.5);padding:24px}
+.device-modal-close{position:absolute;right:14px;top:14px;width:38px;height:38px;border:1px solid var(--border);border-radius:999px;background:#06353d;color:#fff;font-size:1.35rem;cursor:pointer}
+.device-modal-grid{display:grid;grid-template-columns:minmax(210px,280px) 1fr;gap:24px;align-items:start}
+.device-modal-figure{display:grid;place-items:center;min-height:270px;background:#fff;border-radius:14px;padding:18px}
+.device-modal-figure img{width:100%;max-height:320px;object-fit:contain}
+.device-modal-content h3{font-size:1.35rem;line-height:1.25;padding-right:42px;margin-bottom:5px}
+.device-modal-status{display:inline-flex;margin-bottom:16px;border-radius:999px;padding:4px 9px;background:rgba(52,211,153,.12);color:#a7f3d0;font-size:.7rem;font-weight:700}
+.device-modal-status.pending{background:rgba(251,191,36,.12);color:#fde68a}
+.device-facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 16px}
+.device-facts div{background:rgba(0,0,0,.16);border:1px solid var(--border);border-radius:9px;padding:9px}
+.device-facts dt{font-size:.64rem;text-transform:uppercase;color:var(--muted)}
+.device-facts dd{font-size:.82rem;font-weight:600;margin:2px 0 0}
+.device-guidance{font-size:.8rem;color:var(--muted);margin-bottom:16px}
+.device-modal-actions{display:flex;gap:8px;flex-wrap:wrap}
+.device-modal-actions a{display:inline-flex;align-items:center;padding:8px 11px;border-radius:8px;text-decoration:none;font-size:.75rem;font-weight:700}
+body.modal-open{overflow:hidden}
+@media(max-width:650px){.device-modal{padding:8px}.device-modal-card{padding:18px}.device-modal-grid{grid-template-columns:1fr}.device-modal-figure{min-height:210px}.device-facts{grid-template-columns:1fr 1fr}}
 
 </style>
 </head>
@@ -313,6 +340,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
           <option value="yes">Com manual</option>
           <option value="no">Sem manual</option>
         </select>
+        <select id="device-photo" aria-label="Filtrar por foto">
+          <option value="">Todas as fotos</option>
+          <option value="yes">Com foto confirmada</option>
+          <option value="no">Foto pendente</option>
+        </select>
       </div>
       <div class="tool-actions">
         <button type="button" onclick="toggleCompanyGroups(true)">Expandir tudo</button>
@@ -321,6 +353,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
         <a class="report-link" href="https://wa.me/556136862600?text=Olá%2C%20encontrei%20um%20link%20desatualizado%20no%20catálogo%20MultBovinos." target="_blank" rel="noopener noreferrer">Informar link desatualizado</a>
         <span id="device-results" aria-live="polite"></span>
       </div>
+      <div id="device-coverage" class="catalog-coverage" aria-live="polite"></div>
     </div>
     <div id="device-empty" class="filter-empty">Nenhum item encontrado com esses filtros.</div>
     <div id="tab-curral" class="tab-panel active">
@@ -1654,8 +1687,30 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{ou
   </div>
   <p>Gestão à vista de todas as áreas da sua fazenda.<br>Soluções digitais para a agropecuária.</p>
   <p style="margin-top:8px"><a href="https://multsoft.agr.br" target="_blank" rel="noopener noreferrer">multsoft.agr.br</a></p>
-  <div class="update">Atualizado · Setembro 2026</div>
+  <div class="update">Catálogo v2026.09.22 · Revisado em 22/09/2026</div>
 </footer>
+
+<div id="device-modal" class="device-modal" role="dialog" aria-modal="true" aria-labelledby="device-modal-title" hidden>
+  <button type="button" class="device-modal-backdrop" aria-label="Fechar ficha do equipamento" tabindex="-1"></button>
+  <div class="device-modal-card">
+    <button type="button" class="device-modal-close" aria-label="Fechar">×</button>
+    <div class="device-modal-grid">
+      <figure class="device-modal-figure"><img id="device-modal-image" alt=""></figure>
+      <div class="device-modal-content">
+        <h3 id="device-modal-title"></h3>
+        <span id="device-modal-status" class="device-modal-status"></span>
+        <dl class="device-facts">
+          <div><dt>Fabricante</dt><dd id="device-modal-company"></dd></div>
+          <div><dt>Tipo</dt><dd id="device-modal-type"></dd></div>
+          <div><dt>Compatibilidade</dt><dd id="device-modal-system"></dd></div>
+          <div><dt>Manual</dt><dd id="device-modal-manual-status"></dd></div>
+        </dl>
+        <p id="device-modal-guidance" class="device-guidance"></p>
+        <div id="device-modal-actions" class="device-modal-actions"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
 function normalizeSearch(value){
@@ -1727,63 +1782,18 @@ function updateCatalogCounts(){
   if(summary) summary.textContent='Catálogo completo separado por produto: '+total+' vídeos em '+categories+' categorias';
 }
 
-const deviceImageFiles={
-  'AWR250 AGRIDENT':'awr250.jpg',
-  'RS420':'rs420.webp',
-  'SRS2':'srs2.png',
-  'SRS2i':'srs2i-thumb.png',
-  'XRP2':'xrp2.png',
-  'XRS2 | XRS2I':'xrs2.png',
-  'HANDHELD EID TAG':'gallagher-handheld.webp',
-  'HR4':'hr4.webp',
-  'HR5':'hr5.png',
-  'CT002':'ct002.jpg',
-  'CT002 V4':'ct002-v4.jpg',
-  'RC235':'rc235.webp',
-  'AT05':'at05.jpg',
-  'RC325':'rc325.webp',
-  'PAINEL RFID ALLTAGS 8':'alltags8.jpg',
-  'STICK REDER 380 SDK':'stick-reader-380.png',
-  'RT100 V8':'rt100.jpg',
-  'READ 181 ORANGE':'read181.png',
-  'WS-S02':'ws-s02.png',
-  'XR5000':'xr5000.png',
-  'S3':'s3.png',
-  'S2':'s2.png',
-  'JR5000':'jr5000.png',
-  'AT55':'at55.png',
-  'W-O':'w0.webp',
-  'TW-1':'tw1.webp',
-  'TW-3':'tw3.webp',
-  'TWR-5':'twr5.png',
-  'KM-3PLUS':'km3plus.png',
-  'KM3-N':'km3n.jpg',
-  'PRIX MGR CAMPO':'prix-mgr-campo.jpg',
-  'PRIX MGR CAMPO V2':'prix-mgr-campo.jpg',
-  'PRIX REBANHO':'prix-rebanho.jpg',
-  'CLASSE III':'valfran-classe3.png',
-  'ICV-05':'icv05.jpg',
-  'HD EASY':'hd-easy.jpg',
-  'WT300-I-PRO':'wt3000.png',
-  'C20':'c20.png',
-  'LE702':'le702.png',
-  'LE703':'le703.jpg',
-  'LEITOR ELETRÔNICO':'zebra.jpg',
-  'Açores ACR 1500 / HeavyDuty':'hd-easy.jpg',
-  'ALFA 3101C':'alfa3101c.png',
-  'Animaltag AT50 / AT55':'at50.jpg',
-  'Coimma KM3 / KM3-Plus / KT40 / W810':'km3plus.png',
-  'Gallagher W310 / W610 / W810':'tw1.webp',
-  'Lider LD1050 / LD2000':'lider-ld1050.png',
-  'Toledo MGR 2000 / 3000 / 4000 / Campo':'prix-mgr-campo.jpg',
-  'Tru-Test S2 / S3 / XR5000 / ID5000':'xr5000.png',
-  'Weightech WT3000 / Valfran VF-Plus':'wt3000.png',
-  'Allflex AWR250 / ASR550 / AFX110':'awr250.jpg',
-  'Agrident AWR100 / AWl 200':'awl200.png',
-  'Gallagher HR5':'hr5.png',
-  'Tru-Test XRS / EID Antena':'xrs2.png',
-  'DATAMARS GES3S / Destron DTR-4':'datamars-ges3s.jpg'
-};
+let deviceImageFiles={};
+let deviceCatalogRecords=new Map();
+let catalogMeta={version:'',updatedAt:''};
+async function loadDeviceCatalog(){
+  const response=await fetch('data/equipamentos.json',{cache:'no-cache'});
+  if(!response.ok) throw new Error('Não foi possível carregar o catálogo de equipamentos.');
+  const catalog=await response.json();
+  if(!catalog||!Array.isArray(catalog.items)) throw new Error('Catálogo de equipamentos inválido.');
+  catalogMeta={version:catalog.version||'',updatedAt:catalog.updatedAt||''};
+  deviceCatalogRecords=new Map(catalog.items.map(item=>[item.name,item]));
+  deviceImageFiles=Object.fromEntries(catalog.items.filter(item=>item.image).map(item=>[item.name,item.image]));
+}
 function devicePlaceholder(name){
   const initials=name.split(/\s+/).filter(Boolean).slice(0,2).map(part=>part[0]).join('').toUpperCase();
   const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 64"><rect width="58" height="64" rx="8" fill="#0b5965"/><path d="M18 18h22v25H18z" fill="none" stroke="#7dd3fc" stroke-width="2"/><circle cx="29" cy="48" r="2" fill="#5eead4"/><text x="29" y="35" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="11" font-weight="700">'+initials+'</text></svg>';
@@ -1792,6 +1802,11 @@ function devicePlaceholder(name){
 function addDeviceThumbnail(card){
   const name=card.querySelector('.device-name').textContent.trim();
   const file=deviceImageFiles[name];
+  const trigger=document.createElement('button');
+  trigger.type='button';
+  trigger.className='device-thumb-trigger';
+  trigger.setAttribute('aria-label','Abrir ficha de '+name);
+  trigger.title='Ampliar foto e abrir ficha';
   const image=document.createElement('img');
   image.className='device-thumb'+(file?'':' is-placeholder');
   image.src=file?'assets/devices/'+file:devicePlaceholder(name);
@@ -1807,8 +1822,11 @@ function addDeviceThumbnail(card){
     image.alt='Miniatura de identificação de '+name;
     image.title='Foto específica ainda não disponível';
   });
+  trigger.appendChild(image);
+  trigger.addEventListener('click',()=>openDeviceModal(card));
   card.classList.add('device-with-thumb');
-  card.prepend(image);
+  if(!file) card.classList.add('photo-pending');
+  card.prepend(trigger);
 }
 function enhanceDeviceCards(){
   document.querySelectorAll('a.btn-photo[href*="google.com/search"]').forEach(link=>link.textContent='Buscar fotos');
@@ -1821,6 +1839,92 @@ function enhanceDeviceCards(){
       unavailable.textContent='Sem manual';
       unavailable.title='Manual ainda não disponível';
       actions.prepend(unavailable);
+    }
+    if(actions){
+      const details=document.createElement('button');
+      details.type='button';
+      details.className='btn-sm btn-detail';
+      details.textContent='Ver ficha';
+      details.addEventListener('click',()=>openDeviceModal(card));
+      actions.appendChild(details);
+    }
+  });
+  updateDeviceCoverage();
+}
+
+function getDeviceRecord(card){
+  const name=card.querySelector('.device-name').textContent.trim();
+  return deviceCatalogRecords.get(name)||{name,image:null,imageStatus:'pending'};
+}
+function updateDeviceCoverage(){
+  const cards=[...document.querySelectorAll('#tab-curral .device,#tab-desktop .device')];
+  const confirmed=cards.filter(card=>Boolean(getDeviceRecord(card).image)).length;
+  const percent=cards.length?Math.round(confirmed/cards.length*100):0;
+  document.getElementById('device-coverage').innerHTML='<strong>'+confirmed+' de '+cards.length+' itens com foto confirmada</strong><span class="coverage-bar" aria-hidden="true"><span style="width:'+percent+'%"></span></span><span>'+percent+'%</span>';
+}
+let modalReturnFocus=null;
+function openDeviceModal(card){
+  const name=card.querySelector('.device-name').textContent.trim();
+  const record=getDeviceRecord(card);
+  const file=record.image;
+  const modal=document.getElementById('device-modal');
+  const panel=card.closest('.tab-panel');
+  const tab=panel?.id.replace('tab-','')||activeDeviceTab;
+  const typeLabels={bastoes:'Bastão',balancas:'Balança',leitores:'Leitor',documentacao:'Documentação'};
+  const company=getCompany(card)||name.split(/\s+/)[0];
+  const manual=card.querySelector('.btn-manual');
+  const photo=card.querySelector('.btn-photo');
+  const image=document.getElementById('device-modal-image');
+  image.src=file?'assets/devices/'+file:devicePlaceholder(name);
+  image.alt=file?'Foto ampliada de '+name:'Imagem de identificação de '+name;
+  document.getElementById('device-modal-title').textContent=name;
+  document.getElementById('device-modal-company').textContent=company||'Não informado';
+  document.getElementById('device-modal-type').textContent=typeLabels[getDeviceType(card)]||'Equipamento';
+  document.getElementById('device-modal-system').textContent=deviceTabLabels[tab]||'Não informado';
+  document.getElementById('device-modal-manual-status').textContent=manual?'Disponível':'Pendente';
+  const status=document.getElementById('device-modal-status');
+  status.textContent=file?'Foto confirmada':'Foto pendente de confirmação';
+  status.classList.toggle('pending',!file);
+  document.getElementById('device-modal-guidance').textContent=record.note||(tab==='desktop'?'No Desktop, prefira conexão USB ou uma interface que gere porta COM. Consulte o manual antes da configuração.':'Consulte o manual do modelo para confirmar o pareamento e a conexão compatível antes da configuração.');
+  const actions=document.getElementById('device-modal-actions');
+  actions.replaceChildren();
+  if(manual) actions.appendChild(buildModalLink(manual.href,'Abrir manual','btn-manual'));
+  if(photo) actions.appendChild(buildModalLink(photo.href,'Buscar mais fotos','btn-photo'));
+  const report='https://wa.me/556136862600?text='+encodeURIComponent('Olá, encontrei uma informação desatualizada no catálogo MultBovinos. Equipamento: '+name+'.');
+  actions.appendChild(buildModalLink(report,'Informar atualização','report-link'));
+  modalReturnFocus=document.activeElement;
+  modal.hidden=false;
+  document.body.classList.add('modal-open');
+  modal.querySelector('.device-modal-close').focus();
+}
+function buildModalLink(href,label,className){
+  const link=document.createElement('a');
+  link.href=href;
+  link.target='_blank';
+  link.rel='noopener noreferrer';
+  link.className=className;
+  link.textContent=label;
+  return link;
+}
+function closeDeviceModal(){
+  const modal=document.getElementById('device-modal');
+  if(modal.hidden) return;
+  modal.hidden=true;
+  document.body.classList.remove('modal-open');
+  if(modalReturnFocus instanceof HTMLElement) modalReturnFocus.focus();
+}
+function setupDeviceModal(){
+  const modal=document.getElementById('device-modal');
+  modal.querySelector('.device-modal-close').addEventListener('click',closeDeviceModal);
+  modal.querySelector('.device-modal-backdrop').addEventListener('click',closeDeviceModal);
+  document.addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&!modal.hidden) closeDeviceModal();
+    if(event.key==='Tab'&&!modal.hidden){
+      const focusable=[...modal.querySelectorAll('button,a[href]')];
+      const first=focusable[0];
+      const last=focusable[focusable.length-1];
+      if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}
+      else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
     }
   });
 }
@@ -1901,6 +2005,7 @@ function filterDevices(){
   const type=document.getElementById('device-type').value;
   const company=document.getElementById('device-company').value;
   const manual=document.getElementById('device-manual').value;
+  const photo=document.getElementById('device-photo').value;
   let visible=0;
   panel.querySelectorAll('.device').forEach(card=>{
     const cardCompany=getCompany(card);
@@ -1909,7 +2014,9 @@ function filterDevices(){
     const matchesCompany=!company||cardCompany===company;
     const hasManual=Boolean(card.querySelector('.btn-manual'));
     const matchesManual=!manual||(manual==='yes'?hasManual:!hasManual);
-    card.hidden=!(matchesQuery&&matchesType&&matchesCompany&&matchesManual);
+    const hasPhoto=Boolean(getDeviceRecord(card).image);
+    const matchesPhoto=activeDeviceTab==='tratos'||!photo||(photo==='yes'?hasPhoto:!hasPhoto);
+    card.hidden=!(matchesQuery&&matchesType&&matchesCompany&&matchesManual&&matchesPhoto);
     if(!card.hidden) visible++;
   });
   panel.querySelectorAll('.company-group').forEach(group=>{
@@ -1926,6 +2033,7 @@ function clearDeviceFilters(){
   document.getElementById('device-type').value='';
   document.getElementById('device-company').value='';
   document.getElementById('device-manual').value='';
+  document.getElementById('device-photo').value='';
   filterDevices();
 }
 function toggleCompanyGroups(open){
@@ -1947,6 +2055,8 @@ function showTab(name,options={}){
   });
   document.getElementById('device-search').value='';
   document.getElementById('device-manual').value='';
+  document.getElementById('device-photo').value='';
+  document.getElementById('device-photo').disabled=name==='tratos';
   populateDeviceFilters();
   filterDevices();
   if(options.history!==false) updatePageUrl('dispositivos');
@@ -2057,18 +2167,28 @@ function buildGlobalSearch(){
   document.addEventListener('click',event=>{if(!event.target.closest('.quick-find-inner')) closeResults();});
 }
 
-mergeDuplicatePlaylists();
-enhanceDeviceCards();
-updateCatalogCounts();
-setupTabs();
-document.getElementById('video-search').addEventListener('input',filterVideos);
-['device-search','device-type','device-company','device-manual'].forEach(id=>document.getElementById(id).addEventListener(id==='device-search'?'input':'change',filterDevices));
-const params=new URLSearchParams(location.search);
-const initialDevice=deviceTabLabels[params.get('dispositivo')]?params.get('dispositivo'):'curral';
-const initialVideo=videoProductLabels[params.get('videos')]?params.get('videos'):'web';
-showTab(initialDevice,{history:false,scroll:false});
-setVideoProduct(initialVideo,null,{history:false,scroll:false});
-buildGlobalSearch();
+async function initializePage(){
+  try{
+    await loadDeviceCatalog();
+  }catch(error){
+    console.error(error);
+    document.getElementById('device-coverage').textContent='Não foi possível carregar as fotos do catálogo. Recarregue a página.';
+  }
+  mergeDuplicatePlaylists();
+  enhanceDeviceCards();
+  updateCatalogCounts();
+  setupTabs();
+  setupDeviceModal();
+  document.getElementById('video-search').addEventListener('input',filterVideos);
+  ['device-search','device-type','device-company','device-manual','device-photo'].forEach(id=>document.getElementById(id).addEventListener(id==='device-search'?'input':'change',filterDevices));
+  const params=new URLSearchParams(location.search);
+  const initialDevice=deviceTabLabels[params.get('dispositivo')]?params.get('dispositivo'):'curral';
+  const initialVideo=videoProductLabels[params.get('videos')]?params.get('videos'):'web';
+  showTab(initialDevice,{history:false,scroll:false});
+  setVideoProduct(initialVideo,null,{history:false,scroll:false});
+  buildGlobalSearch();
+}
+initializePage();
 </script>
 </body>
 </html>

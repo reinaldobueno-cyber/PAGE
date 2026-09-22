@@ -1,0 +1,305 @@
+{
+  "version": "2026.09.22",
+  "updatedAt": "2026-09-22",
+  "items": [
+    {
+      "name": "AWR250 AGRIDENT",
+      "image": "awr250.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "RS420",
+      "image": "rs420.webp",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "SRS2",
+      "image": "srs2.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "SRS2i",
+      "image": "srs2i-thumb.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "XRP2",
+      "image": "xrp2.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "XRS2 | XRS2I",
+      "image": "xrs2.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "HANDHELD EID TAG",
+      "image": "gallagher-handheld.webp",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "HR4",
+      "image": "hr4.webp",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "HR5",
+      "image": "hr5.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "CT002",
+      "image": "ct002.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "CT002 V4",
+      "image": "ct002-v4.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "RC235",
+      "image": "rc235.webp",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "AT05",
+      "image": "at05.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "RC325",
+      "image": "rc325.webp",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "PAINEL RFID ALLTAGS 8",
+      "image": "alltags8.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "STICK REDER 380 SDK",
+      "image": "stick-reader-380.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "RT100 V8",
+      "image": "rt100.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "READ 181 ORANGE",
+      "image": "read181.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "WS-S02",
+      "image": "ws-s02.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "XR5000",
+      "image": "xr5000.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "S3",
+      "image": "s3.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "S2",
+      "image": "s2.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "JR5000",
+      "image": "jr5000.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "AT55",
+      "image": "at55.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "W-O",
+      "image": "w0.webp",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "TW-1",
+      "image": "tw1.webp",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "TW-3",
+      "image": "tw3.webp",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "TWR-5",
+      "image": "twr5.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "KM-3PLUS",
+      "image": "km3plus.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "KM3-N",
+      "image": "km3n.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "PRIX MGR CAMPO",
+      "image": "prix-mgr-campo.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "PRIX MGR CAMPO V2",
+      "image": "prix-mgr-campo.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "PRIX REBANHO",
+      "image": "prix-rebanho.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "CLASSE III",
+      "image": "valfran-classe3.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "ICV-05",
+      "image": "icv05.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "HD EASY",
+      "image": "hd-easy.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "WT300-I-PRO",
+      "image": "wt3000.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "C20",
+      "image": "c20.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "LE702",
+      "image": "le702.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "LE703",
+      "image": "le703.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "LEITOR ELETRÔNICO",
+      "image": "zebra.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Açores ACR 1500 / HeavyDuty",
+      "image": "hd-easy.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "ALFA 3101C",
+      "image": "alfa3101c.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Animaltag AT50 / AT55",
+      "image": "at50.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Coimma KM3 / KM3-Plus / KT40 / W810",
+      "image": "km3plus.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Gallagher W310 / W610 / W810",
+      "image": "tw1.webp",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Lider LD1050 / LD2000",
+      "image": "lider-ld1050.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Toledo MGR 2000 / 3000 / 4000 / Campo",
+      "image": "prix-mgr-campo.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Tru-Test S2 / S3 / XR5000 / ID5000",
+      "image": "xr5000.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Weightech WT3000 / Valfran VF-Plus",
+      "image": "wt3000.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Allflex AWR250 / ASR550 / AFX110",
+      "image": "awr250.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Agrident AWR100 / AWl 200",
+      "image": "awl200.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Gallagher HR5",
+      "image": "hr5.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "Tru-Test XRS / EID Antena",
+      "image": "xrs2.png",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "DATAMARS GES3S / Destron DTR-4",
+      "image": "datamars-ges3s.jpg",
+      "imageStatus": "verified"
+    },
+    {
+      "name": "EZIWEIGH1I",
+      "image": null,
+      "imageStatus": "pending",
+      "note": "Aguardando confirmação do modelo ou foto oficial."
+    },
+    {
+      "name": "H0 5E0DE",
+      "image": null,
+      "imageStatus": "pending",
+      "note": "Aguardando confirmação do modelo ou foto oficial."
+    },
+    {
+      "name": "WBECK",
+      "image": null,
+      "imageStatus": "pending",
+      "note": "Aguardando confirmação do modelo ou foto oficial."
+    },
+    {
+      "name": "BeckHauser IdBeck / WBeck",
+      "image": null,
+      "imageStatus": "pending",
+      "note": "Aguardando confirmação do modelo ou foto oficial."
+    }
+  ]
+}

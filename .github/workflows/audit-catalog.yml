@@ -1,0 +1,32 @@
+name: Audit catalog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - data/equipamentos.json
+      - assets/devices/**
+      - scripts/audit-catalog.mjs
+      - .github/workflows/audit-catalog.yml
+  schedule:
+    - cron: "17 11 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate catalog structure
+        run: node scripts/audit-catalog.mjs
+      - name: Check external links
+        if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+        run: node scripts/audit-catalog.mjs --remote

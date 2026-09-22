@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 453" role="img" aria-labelledby="title desc">
+  <title id="title">MultBovinos versão Desktop</title>
+  <desc id="desc">Marca MultBovinos Gestão Integrada da Pecuária, versão Desktop</desc>
+  <defs><linearGradient id="footer" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#a8c38e"/><stop offset="1" stop-color="#7d9f68"/></linearGradient></defs>
+  <rect width="1200" height="453" rx="38" fill="#fff"/>
+  <g transform="translate(58 64)" fill="none" stroke="#177540" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <rect width="215" height="196" rx="12" stroke-width="8"/>
+    <path d="M43 75c22-30 45-39 69-29 18-10 40-2 58 25l-13 50-25 26H80l-24-26z"/>
+    <path d="M59 81 30 64l7 42 28 7M157 81l29-17-7 42-28 7M88 144v21m43-21v21M79 171h61"/>
+  </g>
+  <text x="318" y="173" fill="#176d3c" font-family="Arial, Helvetica, sans-serif" font-size="100" font-weight="800" letter-spacing="-4">MULTBOVINOS</text>
+  <text x="323" y="235" fill="#7b9b69" font-family="Arial, Helvetica, sans-serif" font-size="43" font-weight="600">Gestão Integrada da Pecuária</text>
+  <rect x="0" y="316" width="1200" height="137" fill="url(#footer)"/>
+  <text x="600" y="399" text-anchor="middle" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="39" font-weight="800" letter-spacing="2">VERSÃO DESKTOP (DT)</text>
+</svg>

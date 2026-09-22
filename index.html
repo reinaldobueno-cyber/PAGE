@@ -6,6 +6,7 @@
 <title>Integração Bastões e Balanças | MultBovinos</title>
 <meta name="description" content="Dispositivos homologados MultBovinos — bastões, balanças e leitores UHF.">
 <meta name="theme-color" content="#0a5c68">
+<link rel="canonical" href="https://reinaldobueno-cyber.github.io/PAGE/">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -14,7 +15,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased}
+body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--text);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 .header{position:sticky;top:0;z-index:50;background:rgba(6,53,61,.96);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
 .header-inner{max-width:1100px;margin:0 auto;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -168,17 +169,75 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
 @media(max-width:760px){.video-product-filters{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.playlist-group summary{grid-template-columns:auto 1fr}.playlist-count{grid-column:2}.video-search-row input{min-width:100%}.video-product-filters{grid-template-columns:1fr}}
 
+.skip-link{position:fixed;left:12px;top:-60px;z-index:100;background:#fff;color:#06353d;padding:10px 14px;border-radius:8px;font-weight:700;text-decoration:none}
+.skip-link:focus{top:10px}
+.main-nav{display:flex;align-items:center;gap:4px;margin-left:auto;min-width:0;max-width:100%}
+.main-nav a{color:var(--muted);font-size:.76rem;font-weight:600;text-decoration:none;padding:7px 9px;border-radius:7px;white-space:nowrap}
+.main-nav a:hover,.main-nav a:focus-visible{color:#fff;background:rgba(255,255,255,.08)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #7dd3fc;outline-offset:3px}
+.quick-find{background:#042f36;border-bottom:1px solid var(--border);padding:14px 20px}
+.quick-find-inner{max-width:1100px;margin:0 auto;position:relative}
+.quick-find label{display:block;font-size:.72rem;font-weight:700;color:#a7f3d0;margin-bottom:5px}
+.quick-find-row{display:flex;align-items:center;gap:8px;background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:11px;padding:0 12px}
+.quick-find-row:focus-within{border-color:#5eead4;box-shadow:0 0 0 3px rgba(94,234,212,.1)}
+.quick-find-row svg{width:18px;height:18px;fill:var(--muted);flex-shrink:0}
+.quick-find-row input{width:100%;border:0;outline:0;background:transparent;color:#fff;padding:11px 0;font:inherit;font-size:.88rem}
+.quick-find-row input::placeholder{color:#7fa6ad}
+.global-results{position:absolute;z-index:60;left:0;right:0;top:calc(100% + 6px);background:#073f48;border:1px solid rgba(125,211,252,.28);border-radius:12px;box-shadow:0 18px 40px rgba(0,0,0,.35);padding:6px;max-height:420px;overflow:auto}
+.global-results[hidden]{display:none}
+.global-result{width:100%;display:grid;grid-template-columns:auto 1fr;gap:9px;text-align:left;border:0;border-radius:8px;background:transparent;color:var(--text);padding:9px 10px;cursor:pointer}
+.global-result:hover,.global-result:focus-visible{background:rgba(255,255,255,.08)}
+.result-kind{font-size:.62rem;font-weight:700;color:#5eead4;background:rgba(45,212,191,.12);padding:3px 6px;border-radius:5px;align-self:start}
+.result-title{display:block;font-size:.82rem;font-weight:650}
+.result-context{display:block;font-size:.7rem;color:var(--muted);margin-top:1px}
+.global-empty{padding:12px;color:var(--muted);font-size:.82rem;text-align:center}
+.device-tools{background:rgba(255,255,255,.05);border:1px solid var(--border);border-radius:14px;padding:14px;margin-bottom:18px}
+.device-filter-row{display:grid;grid-template-columns:minmax(210px,2fr) repeat(3,minmax(135px,1fr));gap:8px}
+.device-filter-row input,.device-filter-row select{width:100%;background:rgba(0,0,0,.22);border:1px solid var(--border);border-radius:9px;color:#fff;padding:10px 11px;font:inherit;font-size:.8rem}
+.device-filter-row select option{color:#062f36;background:#fff}
+.tool-actions{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-top:9px}
+.tool-actions button,.report-link{background:transparent;border:1px solid var(--border);border-radius:8px;color:var(--text);padding:7px 10px;font:inherit;font-size:.74rem;cursor:pointer;text-decoration:none}
+.tool-actions button:hover,.report-link:hover{background:rgba(255,255,255,.08)}
+#device-results{margin-left:auto;font-size:.72rem;color:var(--muted)}
+.btn-unavailable{color:#94a3b8;background:rgba(148,163,184,.08);border-color:rgba(148,163,184,.2);cursor:default}
+.filter-empty{display:none;padding:18px;text-align:center;color:var(--muted);border:1px dashed var(--border);border-radius:10px;margin-bottom:18px}
+.search-highlight{animation:highlight-card 1.8s ease}
+@keyframes highlight-card{0%,35%{box-shadow:0 0 0 3px #5eead4;background:rgba(45,212,191,.18)}100%{box-shadow:none}}
+@media(max-width:850px){.header-inner{width:100%;flex-wrap:wrap}.main-nav{order:3;width:100%;overflow-x:auto;justify-content:flex-start;padding-top:4px;scrollbar-width:thin}.header-cta{margin-left:auto}.device-filter-row{grid-template-columns:1fr 1fr}.device-filter-row input{grid-column:1/-1}}
+@media(max-width:560px){.quick-find{padding:10px 14px}.device-filter-row{grid-template-columns:1fr}#device-results{width:100%;margin-left:0}.header-inner{padding:9px 14px}.header-cta{font-size:.74rem;padding:8px 10px}.main-nav a{font-size:.72rem;padding:6px 8px}}
+
 </style>
 </head>
 <body>
+<a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
 <header class="header">
   <div class="header-inner">
     <a href="#" class="logo" aria-label="MultSoft">
       <span class="logo-text"><span class="a">MULT</span><span class="b">SOFT</span></span>
     </a>
+    <nav class="main-nav" aria-label="Navegação principal">
+      <a href="#produtos">Produtos</a>
+      <a href="#requisitos">Requisitos</a>
+      <a href="#dispositivos">Dispositivos</a>
+      <a href="#videos">Vídeos</a>
+      <a href="#suporte">Suporte</a>
+    </nav>
     <a href="https://wa.me/556136862600" target="_blank" rel="noopener noreferrer" class="header-cta">WhatsApp Suporte</a>
   </div>
 </header>
+
+<div class="quick-find" role="search">
+  <div class="quick-find-inner">
+    <label for="global-search">Busca geral</label>
+    <div class="quick-find-row">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 3a6.5 6.5 0 1 0 3.98 11.64L19.85 21 21 19.85l-6.36-6.37A6.5 6.5 0 0 0 9.5 3Zm0 2a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9Z"/></svg>
+      <input id="global-search" type="search" placeholder="Busque modelo, fabricante, manual ou vídeo..." autocomplete="off" aria-controls="global-results" aria-expanded="false">
+    </div>
+    <div id="global-results" class="global-results" hidden></div>
+  </div>
+</div>
+
+<main id="conteudo">
 
 <section class="hero">
   <div class="hero-inner">
@@ -241,6 +300,26 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
       <button type="button" class="tab-btn" data-tab="desktop" onclick="showTab('desktop')">MultBovinos Desktop</button>
       <button type="button" class="tab-btn" data-tab="tratos" onclick="showTab('tratos')">MB Tratos</button>
     </div>
+    <div class="device-tools" aria-label="Filtros dos dispositivos">
+      <div class="device-filter-row">
+        <input id="device-search" type="search" placeholder="Buscar modelo ou fabricante..." autocomplete="off" aria-label="Buscar dispositivo">
+        <select id="device-type" aria-label="Filtrar por tipo"><option value="">Todos os tipos</option></select>
+        <select id="device-company" aria-label="Filtrar por fabricante"><option value="">Todos os fabricantes</option></select>
+        <select id="device-manual" aria-label="Filtrar por manual">
+          <option value="">Todos os manuais</option>
+          <option value="yes">Com manual</option>
+          <option value="no">Sem manual</option>
+        </select>
+      </div>
+      <div class="tool-actions">
+        <button type="button" onclick="toggleCompanyGroups(true)">Expandir tudo</button>
+        <button type="button" onclick="toggleCompanyGroups(false)">Recolher tudo</button>
+        <button type="button" onclick="clearDeviceFilters()">Limpar filtros</button>
+        <a class="report-link" href="https://wa.me/556136862600?text=Olá%2C%20encontrei%20um%20link%20desatualizado%20no%20catálogo%20MultBovinos." target="_blank" rel="noopener noreferrer">Informar link desatualizado</a>
+        <span id="device-results" aria-live="polite"></span>
+      </div>
+    </div>
+    <div id="device-empty" class="filter-empty">Nenhum item encontrado com esses filtros.</div>
     <div id="tab-curral" class="tab-panel active">
       <div class="stick-row">
         <img src="data:image/webp;base64,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" alt="Bastão amarelo/preto" width="100" height="150" loading="lazy">
@@ -1561,13 +1640,14 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
   </div>
 </section>
 
-<section class="cta">
+<section class="cta" id="suporte">
   <h2>Dúvidas sobre integração?</h2>
   <p>Núcleo de Infraestrutura MultSoft</p>
   <div class="cta-phone">(61) 3686-2600</div>
   <div class="cta-label">Atendimento especializado</div>
   <a href="https://wa.me/556136862600" target="_blank" rel="noopener noreferrer" class="btn-wa">WhatsApp</a>
 </section>
+</main>
 
 <footer class="footer">
   <div class="logo">
@@ -1580,17 +1660,92 @@ body{font-family:Inter,system-ui,sans-serif;background:var(--deep);color:var(--t
 
 <script>
 function normalizeSearch(value){
-  return value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+  return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 }
+const deviceTabLabels={curral:'Web / SISBOV',desktop:'MultBovinos Desktop',tratos:'MB Tratos'};
 let activeVideoProduct='web';
+let activeDeviceTab='curral';
 const videoProductLabels={
   web:'MB Web',
   desktop:'MB Desktop (MBDT)',
   curral:'MB Curral / MB IATF',
   other:'MB Tratos e outros'
 };
-function setVideoProduct(product,button){
+
+function updatePageUrl(section){
+  const url=new URL(window.location.href);
+  url.searchParams.set('dispositivo',activeDeviceTab);
+  url.searchParams.set('videos',activeVideoProduct);
+  if(section) url.hash=section;
+  history.replaceState(null,'',url);
+}
+
+function mergeDuplicatePlaylists(){
+  const groups=new Map();
+  document.querySelectorAll('.playlist-group').forEach(group=>{
+    const title=group.querySelector('.playlist-title').textContent;
+    const key=group.dataset.product+'|'+normalizeSearch(title).replace(/\s+/g,' ').trim();
+    if(!groups.has(key)){
+      groups.set(key,group);
+      return;
+    }
+    const target=groups.get(key);
+    const targetList=target.querySelector('.vid-list');
+    group.querySelectorAll('.vid-item').forEach(item=>targetList.appendChild(item));
+    const extraPlaylist=group.querySelector('.vid-playlist');
+    if(extraPlaylist){
+      extraPlaylist.textContent='▶ Abrir playlist complementar';
+      target.querySelector('.playlist-body').insertBefore(extraPlaylist,targetList);
+    }
+    group.remove();
+  });
+}
+
+function updateCatalogCounts(){
+  document.querySelectorAll('.company-group').forEach(group=>{
+    const count=group.querySelectorAll('.device').length;
+    const badge=group.querySelector('.company-title span');
+    if(badge) badge.textContent=count+' modelo'+(count===1?'':'s');
+  });
+  document.querySelectorAll('.cat').forEach(cat=>{
+    const badge=cat.querySelector(':scope > .cat-title > span');
+    if(badge) badge.textContent=cat.querySelectorAll('.device').length;
+  });
+  const totals={web:0,desktop:0,curral:0,other:0};
+  document.querySelectorAll('.playlist-group').forEach(group=>{
+    const count=group.querySelectorAll('.vid-item').length;
+    totals[group.dataset.product]+=count;
+    const badge=group.querySelector('.playlist-count');
+    if(badge) badge.textContent=count+' vídeo'+(count===1?'':'s');
+  });
+  document.querySelectorAll('.video-product-btn').forEach(button=>{
+    const badge=button.querySelector('span');
+    if(badge) badge.textContent=totals[button.dataset.videoProduct];
+  });
+  const total=Object.values(totals).reduce((sum,value)=>sum+value,0);
+  const categories=document.querySelectorAll('.playlist-group').length;
+  const summary=document.querySelector('#videos .section-header p');
+  if(summary) summary.textContent='Catálogo completo separado por produto: '+total+' vídeos em '+categories+' categorias';
+}
+
+function enhanceDeviceCards(){
+  document.querySelectorAll('a.btn-photo[href*="google.com/search"]').forEach(link=>link.textContent='Buscar fotos');
+  document.querySelectorAll('#tab-curral .device,#tab-desktop .device').forEach(card=>{
+    const actions=card.querySelector('.device-actions');
+    if(actions&&!actions.querySelector('.btn-manual')){
+      const unavailable=document.createElement('span');
+      unavailable.className='btn-sm btn-unavailable';
+      unavailable.textContent='Sem manual';
+      unavailable.title='Manual ainda não disponível';
+      actions.prepend(unavailable);
+    }
+  });
+}
+
+function setVideoProduct(product,button,options={}){
+  if(!videoProductLabels[product]) return;
   activeVideoProduct=product;
+  button=button||document.querySelector('[data-video-product="'+product+'"]');
   document.querySelectorAll('.video-product-btn').forEach(item=>{
     const active=item===button;
     item.classList.toggle('active',active);
@@ -1598,6 +1753,8 @@ function setVideoProduct(product,button){
   });
   document.querySelectorAll('.playlist-group').forEach(group=>group.open=false);
   filterVideos();
+  if(options.history!==false) updatePageUrl('videos');
+  if(options.scroll) document.getElementById('videos').scrollIntoView({behavior:'smooth',block:'start'});
 }
 function filterVideos(){
   const query=normalizeSearch(document.getElementById('video-search').value.trim());
@@ -1629,14 +1786,206 @@ function filterVideos(){
 function toggleVideoGroups(open){
   document.querySelectorAll('.playlist-group:not([hidden])').forEach(group=>group.open=open);
 }
-document.getElementById('video-search').addEventListener('input',filterVideos);
-filterVideos();
-function showTab(name){
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===name));
-  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id==='tab-'+name));
-  if(['curral','desktop','tratos'].includes(name))
+
+function getCategoryLabel(card){
+  const title=card.closest('.cat')?.querySelector(':scope > .cat-title');
+  if(!title) return 'Documentação';
+  return Array.from(title.childNodes).filter(node=>node.nodeType===Node.TEXT_NODE).map(node=>node.textContent).join(' ').trim();
+}
+function getDeviceType(card){
+  const label=normalizeSearch(getCategoryLabel(card));
+  if(label.includes('bast')) return 'bastoes';
+  if(label.includes('balan')) return 'balancas';
+  if(label.includes('leitor')) return 'leitores';
+  return 'documentacao';
+}
+function getCompany(card){
+  return card.closest('.company-group')?.querySelector('.company-title strong')?.textContent.trim()||'';
+}
+function populateDeviceFilters(){
+  const panel=document.getElementById('tab-'+activeDeviceTab);
+  const typeSelect=document.getElementById('device-type');
+  const companySelect=document.getElementById('device-company');
+  const typeLabels={bastoes:'Bastões',balancas:'Balanças',leitores:'Leitores',documentacao:'Documentação'};
+  const types=[...new Set([...panel.querySelectorAll('.device')].map(getDeviceType))];
+  const companies=[...new Set([...panel.querySelectorAll('.device')].map(getCompany).filter(Boolean))].sort((a,b)=>a.localeCompare(b,'pt-BR'));
+  typeSelect.innerHTML='<option value="">Todos os tipos</option>'+types.map(type=>'<option value="'+type+'">'+typeLabels[type]+'</option>').join('');
+  companySelect.innerHTML='<option value="">Todos os fabricantes</option>'+companies.map(company=>'<option value="'+company.replace(/"/g,'&quot;')+'">'+company+'</option>').join('');
+}
+function filterDevices(){
+  const panel=document.getElementById('tab-'+activeDeviceTab);
+  const query=normalizeSearch(document.getElementById('device-search').value.trim());
+  const type=document.getElementById('device-type').value;
+  const company=document.getElementById('device-company').value;
+  const manual=document.getElementById('device-manual').value;
+  let visible=0;
+  panel.querySelectorAll('.device').forEach(card=>{
+    const cardCompany=getCompany(card);
+    const matchesQuery=!query||normalizeSearch(card.textContent+' '+cardCompany+' '+getCategoryLabel(card)).includes(query);
+    const matchesType=!type||getDeviceType(card)===type;
+    const matchesCompany=!company||cardCompany===company;
+    const hasManual=Boolean(card.querySelector('.btn-manual'));
+    const matchesManual=!manual||(manual==='yes'?hasManual:!hasManual);
+    card.hidden=!(matchesQuery&&matchesType&&matchesCompany&&matchesManual);
+    if(!card.hidden) visible++;
+  });
+  panel.querySelectorAll('.company-group').forEach(group=>{
+    const hasVisible=Boolean(group.querySelector('.device:not([hidden])'));
+    group.hidden=!hasVisible;
+    if(query&&hasVisible) group.open=true;
+  });
+  panel.querySelectorAll('.cat').forEach(cat=>cat.hidden=!cat.querySelector('.device:not([hidden])'));
+  document.getElementById('device-empty').style.display=visible?'none':'block';
+  document.getElementById('device-results').textContent=visible+' item'+(visible===1?'':'s')+' em '+deviceTabLabels[activeDeviceTab];
+}
+function clearDeviceFilters(){
+  document.getElementById('device-search').value='';
+  document.getElementById('device-type').value='';
+  document.getElementById('device-company').value='';
+  document.getElementById('device-manual').value='';
+  filterDevices();
+}
+function toggleCompanyGroups(open){
+  document.querySelectorAll('#tab-'+activeDeviceTab+' .company-group:not([hidden])').forEach(group=>group.open=open);
+}
+function showTab(name,options={}){
+  if(!deviceTabLabels[name]) return;
+  activeDeviceTab=name;
+  document.querySelectorAll('.tab-btn').forEach(button=>{
+    const active=button.dataset.tab===name;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-selected',String(active));
+    button.tabIndex=active?0:-1;
+  });
+  document.querySelectorAll('.tab-panel').forEach(panel=>{
+    const active=panel.id==='tab-'+name;
+    panel.classList.toggle('active',active);
+    panel.hidden=!active;
+  });
+  document.getElementById('device-search').value='';
+  document.getElementById('device-manual').value='';
+  populateDeviceFilters();
+  filterDevices();
+  if(options.history!==false) updatePageUrl('dispositivos');
+  if(options.scroll!==false)
     document.getElementById('dispositivos').scrollIntoView({behavior:'smooth',block:'start'});
 }
+
+function setupTabs(){
+  const tabs=document.querySelector('.tabs');
+  tabs.setAttribute('role','tablist');
+  document.querySelectorAll('.tab-btn').forEach(button=>{
+    button.setAttribute('role','tab');
+    button.setAttribute('aria-controls','tab-'+button.dataset.tab);
+  });
+  document.querySelectorAll('.tab-panel').forEach(panel=>{
+    panel.setAttribute('role','tabpanel');
+    panel.setAttribute('aria-labelledby','tab-button-'+panel.id.replace('tab-',''));
+  });
+  document.querySelectorAll('.tab-btn').forEach(button=>button.id='tab-button-'+button.dataset.tab);
+  tabs.addEventListener('keydown',event=>{
+    if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)) return;
+    const buttons=[...tabs.querySelectorAll('.tab-btn')];
+    let index=buttons.indexOf(document.activeElement);
+    if(event.key==='Home') index=0;
+    else if(event.key==='End') index=buttons.length-1;
+    else index=(index+(event.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;
+    event.preventDefault();
+    buttons[index].focus();
+    showTab(buttons[index].dataset.tab,{scroll:false});
+  });
+}
+
+function flashTarget(element){
+  element.classList.remove('search-highlight');
+  requestAnimationFrame(()=>element.classList.add('search-highlight'));
+  element.scrollIntoView({behavior:'smooth',block:'center'});
+}
+function buildGlobalSearch(){
+  const entries=[];
+  document.querySelectorAll('.device').forEach((card,index)=>{
+    card.id=card.id||'device-result-'+index;
+    const panel=card.closest('.tab-panel');
+    const tab=panel.id.replace('tab-','');
+    const name=card.querySelector('.device-name').textContent.trim();
+    const company=getCompany(card);
+    const category=getCategoryLabel(card);
+    entries.push({kind:'Equipamento',title:name,context:[company,category,deviceTabLabels[tab]].filter(Boolean).join(' · '),search:name+' '+company+' '+category+' '+deviceTabLabels[tab],open(){
+      showTab(tab,{scroll:false});
+      document.getElementById('device-search').value=name;
+      filterDevices();
+      const group=card.closest('.company-group');
+      if(group) group.open=true;
+      flashTarget(card);
+    }});
+  });
+  document.querySelectorAll('.vid-item').forEach((item,index)=>{
+    item.id=item.id||'video-result-'+index;
+    const group=item.closest('.playlist-group');
+    const product=group.dataset.product;
+    const title=item.querySelector('strong').textContent.trim();
+    const category=group.querySelector('.playlist-title').textContent.trim();
+    entries.push({kind:'Vídeo',title,context:category+' · '+videoProductLabels[product],search:title+' '+category+' '+videoProductLabels[product],open(){
+      document.getElementById('video-search').value=title;
+      setVideoProduct(product,null,{scroll:false});
+      filterVideos();
+      group.open=true;
+      flashTarget(item);
+    }});
+  });
+  const input=document.getElementById('global-search');
+  const results=document.getElementById('global-results');
+  function closeResults(){results.hidden=true;input.setAttribute('aria-expanded','false');}
+  function render(){
+    const query=normalizeSearch(input.value.trim());
+    results.replaceChildren();
+    if(!query){closeResults();return;}
+    const matches=entries.filter(entry=>normalizeSearch(entry.search).includes(query)).slice(0,12);
+    if(!matches.length){
+      const empty=document.createElement('div');
+      empty.className='global-empty';
+      empty.textContent='Nenhum resultado encontrado.';
+      results.appendChild(empty);
+    }else matches.forEach(entry=>{
+      const button=document.createElement('button');
+      button.type='button';
+      button.className='global-result';
+      const kind=document.createElement('span');
+      kind.className='result-kind';
+      kind.textContent=entry.kind;
+      const content=document.createElement('span');
+      const title=document.createElement('span');
+      title.className='result-title';
+      title.textContent=entry.title;
+      const context=document.createElement('span');
+      context.className='result-context';
+      context.textContent=entry.context;
+      content.append(title,context);
+      button.append(kind,content);
+      button.addEventListener('click',()=>{entry.open();input.value='';closeResults();});
+      results.appendChild(button);
+    });
+    results.hidden=false;
+    input.setAttribute('aria-expanded','true');
+  }
+  input.addEventListener('input',render);
+  input.addEventListener('focus',render);
+  input.addEventListener('keydown',event=>{if(event.key==='Escape'){closeResults();input.blur();}});
+  document.addEventListener('click',event=>{if(!event.target.closest('.quick-find-inner')) closeResults();});
+}
+
+mergeDuplicatePlaylists();
+enhanceDeviceCards();
+updateCatalogCounts();
+setupTabs();
+document.getElementById('video-search').addEventListener('input',filterVideos);
+['device-search','device-type','device-company','device-manual'].forEach(id=>document.getElementById(id).addEventListener(id==='device-search'?'input':'change',filterDevices));
+const params=new URLSearchParams(location.search);
+const initialDevice=deviceTabLabels[params.get('dispositivo')]?params.get('dispositivo'):'curral';
+const initialVideo=videoProductLabels[params.get('videos')]?params.get('videos'):'web';
+showTab(initialDevice,{history:false,scroll:false});
+setVideoProduct(initialVideo,null,{history:false,scroll:false});
+buildGlobalSearch();
 </script>
 </body>
 </html>
